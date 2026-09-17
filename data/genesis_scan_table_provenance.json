@@ -1,0 +1,116 @@
+{
+  "file": "genesis_scan_table.csv",
+  "release": "1.0.0",
+  "date": "2026-09-17",
+  "sha256": "9da89f3f3e23cf4d178c2a154bb3f9e16dbd08f5b7effa48b6f7293442f9feda",
+  "schema": "alpha,d,kappa,Ps,ns,alpha_s (alpha-major, d, kappa-minor; 512000 rows; coordinates in data/grid_axes.json)",
+  "Ps": {
+    "meaning": "S_R = b^2 M_Pl^2 P_R = kappa^3/(2 pi^2) |u_hat/z|^2 at x_final (dimensionless)",
+    "x_final": 1e-07,
+    "backend": "python:scipy.integrate.solve_ivp/DOP853 exact-coefficient scalar mode solver (vcdm_genesis.modes)",
+    "package_version": "1.0.0",
+    "python": "3.14.6",
+    "numpy": "2.5.1",
+    "scipy": "1.18.0",
+    "platform": "Windows-11-10.0.26200-SP0",
+    "solver_config": {
+      "pump_ratio_min": 100000.0,
+      "tensor_pump_ratio_min": 10000000.0,
+      "cR2_tol": 0.001,
+      "adiabatic_tol": 0.001,
+      "x_search_min": 0.01,
+      "x_search_max": 100000000000000.0,
+      "n_search": 800,
+      "multiplier": 2.0,
+      "bracket": [
+        0.5,
+        0.7071067811865475,
+        1.0,
+        1.4142135623730951,
+        2.0
+      ],
+      "method": "DOP853",
+      "rtol": 1e-10,
+      "atol_factor": 0.001,
+      "max_steps_per_period": 0.0
+    },
+    "code_sha256_at_run": {
+      "background.py": "09eab4f757a40575a0e565a9b05e54c0f4c4c8db797b5be020765e81148bc90a",
+      "spectra.py": "fa7785ab87457880475635230eda5cbada2d0f602ef9336be04435aee6cd328a",
+      "modes.py": "9cf27d00be9a93fb51d8bb78e0e68738609b0ae2ffb6f2161cffa2e45a168af4",
+      "table.py": "5cc080468b54c5f79a76f6b3d5e7ca8ce64e577dc40b988f89a1135d4b9620fb"
+    },
+    "checkpoint_fingerprint": "6a604b51bb3033328dd9e7c49a4acca81758016bc08a4ea336df51d02e287ed9",
+    "wall_seconds_18_processes": 9123.473721799994,
+    "records": 512000,
+    "failed": 0,
+    "missing": 0,
+    "assembled_amplitudes_sha256": "cadf9dd55f086a7848712070fef6063990579e7a7df9217a0e05b7347106ad30",
+    "selection_statistics": {
+      "n": 512000,
+      "ratio_min": 262928.91403904563,
+      "ratio_median": 414952.61898501293,
+      "ratio_max": 532101148.1430682,
+      "x_ini_min": 1024865.8969946608,
+      "x_ini_max": 314431186992.27075,
+      "capped": 0,
+      "nfev_mean": 11411.3616875,
+      "nfev_max": 14930,
+      "seconds_mean": 0.2933312274081907,
+      "seconds_p90": 0.3870509299973492,
+      "seconds_max": 0.7170437999884598
+    },
+    "row_status": "all rows converged (every returned initial time passed the vacuum checks after the safety factor; none at the search cap)",
+    "code_hash_note": "code_sha256_at_run are the hashes of the numerical modules' working-tree bytes at scan time. background.py and spectra.py hash identically to the released LF files; modes.py at run had the same content with CRLF line endings (its scan-time hash equals the released content re-encoded with CRLF); table.py changed after the run (derivatives subcommand and generated-axis options added to its command-line interface; the worker and numerics are unchanged). Consequently the recorded checkpoint fingerprint (which includes table.py's hash) is not re-derivable from the released code, while the solver code that produced Ps is byte-for-byte the released solver code.",
+    "released_code_sha256_lf": {
+      "background.py": "09eab4f757a40575a0e565a9b05e54c0f4c4c8db797b5be020765e81148bc90a",
+      "spectra.py": "fa7785ab87457880475635230eda5cbada2d0f602ef9336be04435aee6cd328a",
+      "modes.py": "9a9422d6a211d7909f22d3f8ecd5eb875e11ed6c03af23ff218bc2fc1881eb9f",
+      "table.py": "252a35577cc18634c75ea73ca8fc879de579b5b9221846d55b7cba359aa6db54"
+    },
+    "code_hash_verification": {
+      "background.py": "identical content (LF)",
+      "spectra.py": "identical content (LF)",
+      "modes.py": "identical content (CRLF bytes at run)",
+      "table.py": "CONTENT DIFFERS"
+    }
+  },
+  "derivatives": {
+    "method": "centred 7-point finite differences of ln Ps in ln kappa; 3 extra converged modes per side per (alpha,d); no smoothing",
+    "stencil_step_ln_kappa": 0.14573323373380037,
+    "pad_modes": 38400,
+    "pad_fingerprint": "81898743b24836e805bbf1b2dc23557c66a25bf9568d86d789856837e1c8b825",
+    "noise_budget": {
+      "stencil": 7,
+      "h": 0.14573323373380037,
+      "delta": 2e-09,
+      "first_derivative_bound": 2.5160126984928388e-08,
+      "second_derivative_bound": 5.692056239741502e-07,
+      "sum_abs_w1_times_h": 1.8333333333333333,
+      "sum_abs_w2_times_h2": 6.04444444444445
+    },
+    "five_point_vs_seven_point": {
+      "max_abs_diff_ns": 4.5686758287644125e-07,
+      "max_abs_diff_alpha_s": 3.7218399384642e-07,
+      "note": "truncation-order consistency diagnostic on the same data"
+    },
+    "ranges": {
+      "ns": [
+        0.4895813000261624,
+        1.0013043081143715
+      ],
+      "alpha_s": [
+        -0.048756722986269097,
+        -0.00023666317248682844
+      ]
+    },
+    "Ps_preserved_verbatim": true,
+    "wall_seconds": 739.4794918999833
+  },
+  "reproduction": [
+    "python -m vcdm_genesis.table amplitudes --outdir OUT --axes data/grid_axes.json --x-final 1e-7 --processes 18 --chunk-size 1000",
+    "python -m vcdm_genesis.table assemble --outdir OUT",
+    "python -m vcdm_genesis.table derivatives --amplitudes OUT/amplitudes.csv --workdir OUT/derivatives --output genesis_scan_table.csv --processes 18"
+  ],
+  "hash_convention": "SHA-256 values of text files are of LF-normalized bytes (equal to the committed Git blobs and to the release archive); a CRLF checkout on Windows yields different file hashes"
+}

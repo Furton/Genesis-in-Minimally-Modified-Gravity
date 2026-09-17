@@ -1,0 +1,15 @@
+# Python build and cache debris
+__pycache__/
+*.py[cod]
+.pytest_cache/
+build/
+dist/
+*.egg-info/
+.ipynb_checkpoints/
+# editor / OS
+.vscode/
+.idea/
+Thumbs.db
+.DS_Store
+# outputs of the example commands in README.md
+out/

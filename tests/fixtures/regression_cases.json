@@ -1,0 +1,167 @@
+{
+  "description": "Compact regression fixture: prior independent reference values and the values reproduced by this release's solver (vcdm_genesis.modes) with the default SolverConfig. Dimensionless powers S_R = b^2 M_Pl^2 P_R, S_h = b^2 M_Pl^2 P_h.",
+  "generator_version": "1.0.0",
+  "solver_config": {
+    "pump_ratio_min": 100000.0,
+    "tensor_pump_ratio_min": 10000000.0,
+    "cR2_tol": 0.001,
+    "adiabatic_tol": 0.001,
+    "x_search_min": 0.01,
+    "x_search_max": 100000000000000.0,
+    "n_search": 800,
+    "multiplier": 2.0,
+    "bracket": [
+      0.5,
+      0.7071067811865475,
+      1.0,
+      1.4142135623730951,
+      2.0
+    ],
+    "method": "DOP853",
+    "rtol": 1e-10,
+    "atol_factor": 0.001,
+    "max_steps_per_period": 0.0
+  },
+  "cases": {
+    "R1": {
+      "kind": "scalar",
+      "alpha0": 1e-23,
+      "d": 0.3,
+      "kappa": 1e-07,
+      "x_final": 0.0,
+      "reference": {
+        "S_R": 6.91139484127e+19,
+        "source": "S2/S3 prior independent computation"
+      },
+      "measured": {
+        "S_R": 6.911394834945833e+19,
+        "x_ini": 2985365124.30949,
+        "ratio_at_returned": 427056.33008701954,
+        "nfev": 13394,
+        "rel_change_x_ini_x2": 3.2262537086324983e-10,
+        "rel_diff_independent_R_formulation": 1.9645929327793965e-10
+      }
+    },
+    "R2_xf1e-7": {
+      "kind": "scalar",
+      "alpha0": 1e-23,
+      "d": 0.3,
+      "kappa": 1e-07,
+      "x_final": 1e-07,
+      "reference": {
+        "ratio_to_x0": 0.9999999773106846,
+        "endpoint_dlnR_dx_at_x0": -0.1134465522
+      },
+      "measured": {
+        "S_R": 6.911394678131004e+19,
+        "x_ini": 2985365124.30949,
+        "ratio_at_returned": 427056.33008701954,
+        "nfev": 13394,
+        "rel_change_x_ini_x2": 3.2262470472943505e-10,
+        "rel_diff_independent_R_formulation": 1.9645873816642734e-10,
+        "ratio_to_x0": 0.9999999773106829,
+        "endpoint_dlnR_dx_at_x0": -0.11344655216690369
+      }
+    },
+    "R5": {
+      "kind": "tensor",
+      "d": 0.5,
+      "kappa": 1e-07,
+      "x_final": 0.0,
+      "reference": {
+        "S_h": 2.0196314518e-15
+      },
+      "measured": {
+        "S_h": 2.0196314515070598e-15,
+        "x_ini": 714860803.6442118,
+        "ratio_at_returned": 60723242.36521315,
+        "nfev": 5654,
+        "rel_change_x_ini_x2": 6.61889432151952e-11
+      }
+    },
+    "R6": {
+      "kind": "scalar",
+      "alpha0": 1e-30,
+      "d": 0.15316455696202533,
+      "kappa": 2.2616759492228647e-06,
+      "x_final": 1e-07,
+      "reference": {
+        "note": "pump zero near x = 1.368e6: the pump ratio passes the 1e5 threshold at x = 1.365114e6 (ratio 137962.99) but fails at 2x (ratio 2446.93); the bracket retest rejects such a start"
+      },
+      "measured": {
+        "S_R": 3.8532830520173954e+24,
+        "x_ini": 68068297.65036608,
+        "ratio_at_returned": 377650.54125442787,
+        "nfev": 7586,
+        "rel_change_x_ini_x2": 2.376647323387715e-09,
+        "rel_diff_independent_R_formulation": 1.2011835970326956e-10
+      }
+    },
+    "R7": {
+      "kind": "scalar",
+      "alpha0": 1e-30,
+      "d": 0.13417721518987344,
+      "kappa": 1.2263306841775643e-07,
+      "x_final": 1e-07,
+      "reference": {
+        "S_R": 1.48036818276e+24
+      },
+      "measured": {
+        "S_R": 1.4803681797877745e+24,
+        "x_ini": 1133631220.315166,
+        "ratio_at_returned": 375066.97948344995,
+        "nfev": 7286,
+        "rel_change_x_ini_x2": 1.5414249876499753e-09,
+        "rel_diff_independent_R_formulation": 1.3953371791330937e-10
+      }
+    },
+    "corner_a0_d0_k0": {
+      "kind": "scalar",
+      "alpha0": 1e-30,
+      "d": 0.1,
+      "kappa": 1e-09,
+      "x_final": 1e-07,
+      "reference": {},
+      "measured": {
+        "S_R": 4.959291510726186e+22,
+        "x_ini": 99288701943.83551,
+        "ratio_at_returned": 2692994.3623657343,
+        "nfev": 6458,
+        "rel_change_x_ini_x2": 1.7726899392833673e-08,
+        "rel_diff_independent_R_formulation": 2.3963453443798244e-10
+      }
+    },
+    "corner_a79_d79_k79": {
+      "kind": "scalar",
+      "alpha0": 1e-21,
+      "d": 0.4,
+      "kappa": 0.0001,
+      "x_final": 1e-07,
+      "reference": {},
+      "measured": {
+        "S_R": 1.5873003992873818e+18,
+        "x_ini": 3099329.806367185,
+        "ratio_at_returned": 403834.5924588513,
+        "nfev": 12914,
+        "rel_change_x_ini_x2": 6.31309782228584e-10,
+        "rel_diff_independent_R_formulation": 2.1473822719997315e-10
+      }
+    },
+    "interior_mid": {
+      "kind": "scalar",
+      "alpha0": 3.605471154250499e-26,
+      "d": 0.2518987341772152,
+      "kappa": 3.401304938279253e-07,
+      "x_final": 1e-07,
+      "reference": {},
+      "measured": {
+        "S_R": 8.267357843695807e+21,
+        "x_ini": 820911952.2008792,
+        "ratio_at_returned": 425839.5421699772,
+        "nfev": 12458,
+        "rel_change_x_ini_x2": 3.018146843558611e-10,
+        "rel_diff_independent_R_formulation": 1.00241703826498e-10
+      }
+    }
+  }
+}

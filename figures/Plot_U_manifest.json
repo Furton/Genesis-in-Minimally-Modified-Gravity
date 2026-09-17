@@ -1,0 +1,49 @@
+{
+  "figure": "Figure 1 (fig:Matter_Potential), paper path figures/Plot_U.pdf",
+  "formula": "U_hat(y;d) = b^2 U/chi1^2 = C^(-p) [Gamma(p,y)/d + Gamma(p+1,y)], C=2(1+d)/d, p=2/d, Gamma = upper unregularized incomplete gamma; U(y->inf)=0",
+  "normalization": "absolute; vertical axis tau_B^2 U/chi_1^2 = U_hat; no per-curve rescaling",
+  "d_values": [
+    1.0,
+    0.5,
+    0.3333333333333333
+  ],
+  "labels": [
+    "d = 1",
+    "d = 1/2",
+    "d = 1/3"
+  ],
+  "genesis_endpoints_C": [
+    4.0,
+    6.0,
+    8.0
+  ],
+  "plateaus_U_hat_0": [
+    0.18750000000000003,
+    0.02777777777777778,
+    0.004119873046875006
+  ],
+  "y_range": [
+    0.01,
+    32.0
+  ],
+  "log_samples_per_curve": 1600,
+  "endpoint_inserted_exactly": true,
+  "samples_written_per_curve": [
+    1601,
+    1601,
+    1601
+  ],
+  "legend": false,
+  "generator": "vcdm_genesis.figures.plot_u",
+  "generator_version": "1.0.0",
+  "python": "3.12.10",
+  "numpy": "2.4.6",
+  "scipy": "1.17.1",
+  "matplotlib": "3.11.0",
+  "hash_convention": "SHA-256 of LF-normalized bytes for text files (.csv/.json), raw bytes for PDF; equals the committed Git blob hashes",
+  "curves_csv": "Plot_U_curves.csv",
+  "curves_csv_sha256": "8eff07356fb98072285f5f45a7e86013803bb643e235d416231cfdffed097ce2",
+  "pdf": "Plot_U.pdf",
+  "pdf_sha256": "b919dc4be3f3de223ae6b21ba03724b7e7ee7a6c6433fe4ccfe8df3e02c48165",
+  "note": "PDF bytes may differ across matplotlib/font versions; compare curve data and rendered content."
+}

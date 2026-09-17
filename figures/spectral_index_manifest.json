@@ -1,0 +1,63 @@
+{
+  "figure": "Figure 5 (fig:Spectral_Index_and_running): figures/n_s.pdf, figures/alpha_s.pdf",
+  "configuration": {
+    "alpha0": 1e-23,
+    "d_values": [
+      0.3,
+      0.35,
+      0.4
+    ],
+    "kappa_range": [
+      1e-09,
+      0.0001
+    ],
+    "n_kappa": 41,
+    "x_final": 1e-07,
+    "rtol": 1e-10,
+    "stencil": 7,
+    "h_ln_kappa": 0.28782313662425574,
+    "pad_modes_per_side": 3
+  },
+  "numerical_method": "independently evolved modes (vcdm_genesis.modes) differentiated by centred 7-point finite differences in ln kappa; no smoothing",
+  "noise_budget": {
+    "stencil": 7,
+    "h": 0.28782313662425574,
+    "delta": 1e-09,
+    "first_derivative_bound": 6.369652401247693e-09,
+    "second_derivative_bound": 7.296338714618172e-08,
+    "sum_abs_w1_times_h": 1.8333333333333333,
+    "sum_abs_w2_times_h2": 6.044444444444449
+  },
+  "hash_convention": "SHA-256 of LF-normalized bytes for text files (.csv/.json), raw bytes for PDF; equals the committed Git blob hashes",
+  "fit_curves": {
+    "coefficient_record": "data/fit_coefficients.json",
+    "coefficient_record_sha256": "0703ba480fce12292414d55c3b315042d2a740f9099e9ceaa28ba534665d5fa5",
+    "coefficients": {
+      "c0": 0.0167018906314,
+      "c1": -0.283027102799,
+      "q": 1.31920847627
+    },
+    "method": "7-point finite differences of the closed-form template in ln kappa (vcdm_genesis.fit.fit_derivatives, default step h=1e-2)"
+  },
+  "planck_bands": {
+    "n_s": [
+      0.9649,
+      0.0042
+    ],
+    "alpha_s": [
+      -0.0045,
+      0.0067
+    ],
+    "note": "separate marginal benchmarks, drawn as in the manuscript"
+  },
+  "generator": "vcdm_genesis.figures.spectral_index",
+  "generator_version": "1.0.0",
+  "python": "3.14.6",
+  "numpy": "2.5.1",
+  "scipy": "1.18.0",
+  "matplotlib": "3.11.0",
+  "curves_csv": "spectral_index_curves.csv",
+  "curves_csv_sha256": "25301320aed2b185f219923e1aeedf53439402c2b29f6ef5e3dac2868d0fe752",
+  "n_s_pdf_sha256": "ec63866887697b4b44e9f963dad3449687d604b402c652616d49ff463bfa84b8",
+  "alpha_s_pdf_sha256": "d7d0b87ea3e1d27a894504ba069f8a2cb183f1c921069a89286eb518ffc58054"
+}

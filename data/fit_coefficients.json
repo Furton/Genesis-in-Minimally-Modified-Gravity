@@ -1,0 +1,61 @@
+{
+  "c0": 0.0167018906314,
+  "c1": -0.283027102799,
+  "q": 1.31920847627,
+  "template": "ln S_R^fit = -ln(4 pi^2 alpha0) - 2(1+d)/d + 2 J(d,kappa)/d + c0 + c1 d + q ln C_{nu*}; A=3(1+d)^2, xi=kappa^d, nu*=sqrt(9/4+A xi(1-xi)), u_g=A(1-xi)/(nu*+3/2), J=3+sqrt(A) arctan(u_g/sqrt(A))+(3/2)ln[A/(A+u_g^2)]-A(3+u_g)/(A+u_g^2), ln C_nu=(2nu-3)ln2+2[lnGamma(nu)-lnGamma(3/2)]",
+  "normalization": "S_R = b^2 M_Pl^2 P_R (dimensionless; tau_B=-1, M_Pl=1 convention of the scan table)",
+  "status": "released",
+  "fit_method": "minimax (maximum absolute log-error) linear-programming fit of the residual c0 + c1 d + q ln C_nu on the training groups of the grouped (d,kappa) split (seed 1234, 80 percent training; Fitting.ipynb, vcdm_genesis.fit.minimax_fit)",
+  "note": "The released coefficients are fixed and are the values quoted in the paper. They are not the minimax optimum of the released training set; that optimum is recorded under refit_alternative for reference and is not used anywhere.",
+  "validation": {
+    "table": "genesis_scan_table.csv (SHA-256 9da89f3f3e23cf4d178c2a154bb3f9e16dbd08f5b7effa48b6f7293442f9feda, LF-normalized bytes); Ps column SHA-256 of the assembled amplitude table cadf9dd55f086a7848712070fef6063990579e7a7df9217a0e05b7347106ad30",
+    "split": "grouped (d,kappa) split, seed 1234, 80 percent training (409600 / 102400 rows; data/fit_split_manifest.json)",
+    "training": {
+      "mean_abs_rel_percent": 0.10856403771692741,
+      "max_abs_rel_percent": 0.32841702320234645,
+      "argmax": {
+        "alpha0": 7.692649574879162e-22,
+        "d": 0.17215189873417724,
+        "kappa": 0.0001,
+        "ratio_fit_over_ref": 1.0032841702320234
+      }
+    },
+    "verification": {
+      "mean_abs_rel_percent": 0.10923668088725846,
+      "max_abs_rel_percent": 0.32762308290414477,
+      "argmax": {
+        "alpha0": 7.692649574879162e-22,
+        "d": 0.16835443037974684,
+        "kappa": 0.0001,
+        "ratio_fit_over_ref": 1.0032762308290415
+      }
+    },
+    "full_grid": {
+      "mean_abs_rel_percent": 0.10869856635099362,
+      "median_abs_rel_percent": 0.09223700523373281,
+      "q99_abs_rel_percent": 0.30040071818037606,
+      "max_abs_rel_percent": 0.32841702320234645
+    },
+    "error_convention": "table-relative: abs(S_fit/S_table - 1); not an integration-error estimate of the histories",
+    "split_manifest": "data/fit_split_manifest.json"
+  },
+  "refit_alternative": {
+    "c0": 0.013955766860785196,
+    "c1": -0.27528673821327504,
+    "q": 1.3218600608258755,
+    "training": {
+      "mean_abs_rel_percent": 0.11448,
+      "max_abs_rel_percent": 0.27808
+    },
+    "verification": {
+      "mean_abs_rel_percent": 0.114142,
+      "max_abs_rel_percent": 0.27816
+    },
+    "full_grid": {
+      "mean_abs_rel_percent": 0.114412,
+      "max_abs_rel_percent": 0.27816
+    },
+    "adopted": false,
+    "note": "minimax linear programme on the released training groups; recorded for reference, not adopted"
+  }
+}
