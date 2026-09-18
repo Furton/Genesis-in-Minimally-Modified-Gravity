@@ -20,12 +20,12 @@ WindowFrame->Normal*)
 Notebook[{
 Cell[BoxData[{
  RowBox[{
-  RowBox[{"a", "=", "0.0167018906314"}], ";"}], "\n", 
+  RowBox[{"a", "=", "0.0139557668608"}], ";"}], "\n", 
  RowBox[{
   RowBox[{"b", "=", 
-   RowBox[{"-", "0.283027102799"}]}], ";"}], "\n", 
+   RowBox[{"-", "0.275286738213"}]}], ";"}], "\n", 
  RowBox[{
-  RowBox[{"q", "=", "1.31920847627"}], ";"}], "\n", 
+  RowBox[{"q", "=", "1.32186006083"}], ";"}], "\n", 
  RowBox[{
   RowBox[{
    RowBox[{"\[Tau]B", "=", 

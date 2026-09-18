@@ -32,7 +32,7 @@ __all__ = ["COEFFICIENT_FILE", "RELEASED_COEFFICIENTS", "load_coefficients", "te
            "S_R_fit", "fit_derivatives", "split_by_d_kappa", "minimax_fit", "evaluate_fit"]
 
 COEFFICIENT_FILE = Path(__file__).resolve().parent.parent / "data" / "fit_coefficients.json"
-RELEASED_COEFFICIENTS = {"c0": 0.0167018906314, "c1": -0.283027102799, "q": 1.31920847627}
+RELEASED_COEFFICIENTS = {"c0": 0.0139557668608, "c1": -0.275286738213, "q": 1.32186006083}
 
 
 def load_coefficients(path: Path | None = None) -> dict:

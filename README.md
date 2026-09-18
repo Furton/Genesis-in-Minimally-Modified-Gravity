@@ -66,13 +66,15 @@ vacuum selection, DOP853 at `rtol = 1e-10`); see
 
 ## Analytic fit and validation
 
-Template and coefficients: `data/fit_coefficients.json` (`c0 = 0.0167018906314`,
-`c1 = -0.283027102799`, `q = 1.31920847627`), the values quoted in the paper.
-The coefficients are fixed. They are not the minimax optimum of the released
-training set: the linear programme on the same training groups gives
-`c0 = 0.0139557668608`, `c1 = -0.275286738213`, `q = 1.32186006083` with a
-maximum error of 0.278 percent (mean 0.114 percent). That alternative is
-recorded in the coefficient record for reference and is not used anywhere.
+Template and coefficients: `data/fit_coefficients.json` (`c0 = 0.0139557668608`,
+`c1 = -0.275286738213`, `q = 1.32186006083`), the minimax optimum of the
+released training set (refit of 2026-09-18; linear programme of
+`vcdm_genesis.fit.minimax_fit`, rounded to 12 significant digits). They
+supersede the coefficients of release 1.0.0 (`c0 = 0.0167018906314`,
+`c1 = -0.283027102799`, `q = 1.31920847627`), which had been fitted to an
+earlier table and give a maximum error of 0.328 percent (mean 0.109 percent)
+on the released table; those values are kept in the coefficient record for
+reference and are not used anywhere.
 
 The split holds out complete `(d, kappa)` pairs, keeping all `alpha` values
 together (seed 1234, 80 percent training; 409,600 / 102,400 rows;
@@ -80,12 +82,12 @@ together (seed 1234, 80 percent training; 409,600 / 102,400 rows;
 
 | split | mean error | max error |
 |---|---:|---:|
-| training | 0.1086% | 0.3284% |
-| verification | 0.1092% | 0.3276% |
-| full grid | 0.1087% | 0.3284% |
+| training | 0.1145% | 0.2781% |
+| verification | 0.1141% | 0.2782% |
+| full grid | 0.1144% | 0.2782% |
 
 These are **errors relative to the numerical table** (fraction convention:
-0.3284 percent = 0.003284); they are not integration-error estimates. The
+0.2782 percent = 0.002782); they are not integration-error estimates. The
 integration accuracy of the underlying histories is characterized separately
 in `docs/VALIDATION.md` (relative power changes below `2e-8` under
 initial-time doubling, `7e-10` under tolerance tightening, agreement

@@ -61,18 +61,18 @@
       "seconds_max": 0.7170437999884598
     },
     "row_status": "all rows converged (every returned initial time passed the vacuum checks after the safety factor; none at the search cap)",
-    "code_hash_note": "code_sha256_at_run are the hashes of the numerical modules' working-tree bytes at scan time. background.py and spectra.py hash identically to the released LF files; modes.py at run had the same content with CRLF line endings (its scan-time hash equals the released content re-encoded with CRLF); table.py changed after the run (derivatives subcommand and generated-axis options added to its command-line interface; the worker and numerics are unchanged). Consequently the recorded checkpoint fingerprint (which includes table.py's hash) is not re-derivable from the released code, while the solver code that produced Ps is byte-for-byte the released solver code.",
+    "code_hash_note": "code_sha256_at_run are the hashes of the numerical modules' working-tree bytes at scan time. background.py hashes identically to the released LF file; modes.py at run had the same content with CRLF line endings (its scan-time hash equals the released content re-encoded with CRLF); spectra.py and table.py differ from their scan-time bytes in content, not only in line endings (table.py's command-line interface was extended after the run: derivatives subcommand and generated-axis options; the scan-time versions of both files are not in the repository, so the exact differences are not recoverable from it). Consequently the recorded checkpoint fingerprint (which includes table.py's hash) is not re-derivable from the released code, and byte identity between the released solver and the code that produced Ps is established for background.py and modes.py only. The released code reproduces the released Ps values bitwise at the 24 reserved grid points (tests/test_final_check_sample.py) and the regression fixture to 1e-9 (tests/test_regression_fixture.py).",
     "released_code_sha256_lf": {
       "background.py": "09eab4f757a40575a0e565a9b05e54c0f4c4c8db797b5be020765e81148bc90a",
-      "spectra.py": "fa7785ab87457880475635230eda5cbada2d0f602ef9336be04435aee6cd328a",
+      "spectra.py": "5f4ec87425171bc08d7f9e6276f40da101fb63b05653c72d8ab59ae5d7633974",
       "modes.py": "9a9422d6a211d7909f22d3f8ecd5eb875e11ed6c03af23ff218bc2fc1881eb9f",
-      "table.py": "252a35577cc18634c75ea73ca8fc879de579b5b9221846d55b7cba359aa6db54"
+      "table.py": "4d9a85b53619efe78eb7bc8d492da502225b65d89d568c59be25014513c36b93"
     },
     "code_hash_verification": {
       "background.py": "identical content (LF)",
-      "spectra.py": "identical content (LF)",
+      "spectra.py": "CONTENT DIFFERS (modified after the scan; scan-time bytes not in the repository)",
       "modes.py": "identical content (CRLF bytes at run)",
-      "table.py": "CONTENT DIFFERS"
+      "table.py": "CONTENT DIFFERS (modified after the scan; scan-time bytes not in the repository)"
     }
   },
   "derivatives": {

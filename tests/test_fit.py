@@ -22,24 +22,25 @@ def test_coefficient_record_is_the_released_set():
 def test_template_matches_wolfram_notebook_saved_values():
     """Cross-representation check against the Wolfram evaluation of the same template.
 
-    The four rows and values were evaluated in Mathematica 13.2 with the same template and
-    coefficients ('Analytic fit.nb'); wolframscript reproduces them to 3e-14 (docs/VALIDATION.md).
+    The four rows were evaluated with WolframScript 1.9.0 from the definitions of 'Analytic fit.nb'
+    (refit coefficients of 2026-09-18); the Python template agrees with them to 3e-14 (docs/VALIDATION.md).
     """
     cases = [
-        (2.3285662984981965e-29, 0.14177215189873418, 2.196707090793235e-7, 1.1251840619147053e23),
-        (2.6938893095901644e-22, 0.24810126582278486, 1.64130719537513e-7, 1.0600596632377832e18),
-        (9.162739011886693e-28, 0.1, 1.548365256585496e-9, 4.875993664159414e19),
-        (2.5413430367026287e-23, 0.14556962025316456, 3.401304938279253e-7, 1.292943720978059e17),
+        (2.3285662984981965e-29, 0.14177215189873418, 2.196707090793235e-7, 1.1239216240945546e+23),
+        (2.6938893095901644e-22, 0.24810126582278486, 1.64130719537513e-7, 1.0593155471464253e+18),
+        (9.162739011886693e-28, 0.1, 1.548365256585496e-9, 4.869083992113025e+19),
+        (2.5413430367026287e-23, 0.14556962025316456, 3.401304938279253e-7, 1.2915390115154e+17),
     ]
     for a, d, k, ps in cases:
         assert fit.S_R_fit(a, d, k, COEFFS) == pytest.approx(ps, rel=1e-11)
 
 
 def test_template_matches_manuscript_table_at_exact_grid_points():
-    """Manuscript Table 1 lists rounded parameters; the fit values are reproduced at the exact grid points."""
+    """The paper's Table 1 (data/fit_sample_table.csv) lists rounded parameters; the fit values
+    (8 significant digits) are reproduced at the exact grid points."""
     A = np.logspace(-30, -21, 80); D = np.linspace(0.1, 0.4, 80); K = np.logspace(-9, -4, 80)
-    table = [(7.69265e-22, 0.160759, 2.19671e-7, 1.4061441e16), (1.09138e-24, 0.183544, 3.02700e-6, 2.2422929e19),
-             (4.55227e-22, 0.251899, 5.91769e-8, 7.0691692e17), (2.26168e-25, 0.164557, 6.27290e-6, 2.9951747e19)]
+    table = [(7.69265e-22, 0.160759, 2.19671e-7, 1.4046197e16), (1.09138e-24, 0.183544, 3.02700e-6, 2.2404214e19),
+             (4.55227e-22, 0.251899, 5.91769e-8, 7.0641840e17), (2.26168e-25, 0.164557, 6.27290e-6, 2.9927273e19)]
     for a, d, k, ps in table:
         ae = A[np.argmin(np.abs(A / a - 1))]; de = D[np.argmin(np.abs(D - d))]; ke = K[np.argmin(np.abs(K / k - 1))]
         assert fit.S_R_fit(ae, de, ke, COEFFS) == pytest.approx(ps, rel=2e-7)
@@ -117,19 +118,25 @@ def test_grouped_split_and_residuals_reproduce_notebook_statistics():
     assert sv["mean_abs_rel_percent"] == pytest.approx(rv["verification"]["mean_abs_rel_percent"], abs=1e-9)
     assert sa["mean_abs_rel_percent"] == pytest.approx(rv["full_grid"]["mean_abs_rel_percent"], abs=1e-9)
     assert sa["max_abs_rel_percent"] == pytest.approx(rv["full_grid"]["max_abs_rel_percent"], abs=1e-9)
-    # the paper's claim: mean about 0.11 percent, maximum below 0.33 percent (fraction 0.0033)
-    assert sa["mean_abs_rel"] < 0.0012 and sa["max_abs_rel"] < 0.0033
+    # the paper's claim: mean about 0.11 percent, maximum below 0.28 percent (fraction 0.0028)
+    assert sa["mean_abs_rel"] < 0.0012 and sa["max_abs_rel"] < 0.0028
     # the README table (4 significant digits)
-    assert (round(st["mean_abs_rel_percent"], 4), round(st["max_abs_rel_percent"], 4)) == (0.1086, 0.3284)
-    assert (round(sv["mean_abs_rel_percent"], 4), round(sv["max_abs_rel_percent"], 4)) == (0.1092, 0.3276)
-    # the released coefficients are fixed and are not the LP optimum of the released training set;
-    # the record stores that optimum for reference (refit_alternative, not adopted)
+    assert (round(st["mean_abs_rel_percent"], 4), round(st["max_abs_rel_percent"], 4)) == (0.1145, 0.2781)
+    assert (round(sv["mean_abs_rel_percent"], 4), round(sv["max_abs_rel_percent"], 4)) == (0.1141, 0.2782)
+    # the released coefficients are the LP optimum of the released training set rounded to 12 significant
+    # digits; the record stores the full-precision solution (lp_solution)
     coeffs, t = fit.minimax_fit(alpha[train], d[train], kappa[train], ps[train])
-    alt = COEFFS["refit_alternative"]
+    lp = COEFFS["lp_solution"]
     for k in ("c0", "c1", "q"):
-        assert coeffs[k] == pytest.approx(alt[k], abs=1e-7)
-        assert coeffs[k] != pytest.approx(fit.RELEASED_COEFFICIENTS[k], abs=1e-6)
-    assert 100 * np.expm1(t) == pytest.approx(alt["training"]["max_abs_rel_percent"], abs=2e-5)
+        assert coeffs[k] == pytest.approx(lp[k], abs=1e-7)
+        assert coeffs[k] == pytest.approx(fit.RELEASED_COEFFICIENTS[k], abs=1e-7)
+    assert 100 * np.expm1(t) == pytest.approx(lp["max_abs_rel_percent_training"], abs=2e-5)
+    # the superseded coefficients of release 1.0.0 are kept in the record for reference only
+    prev = COEFFS["previous_coefficients"]
+    assert prev["adopted"] is False
+    sp = fit.evaluate_fit(alpha, d, kappa, ps, prev)
+    assert sp["max_abs_rel_percent"] == pytest.approx(prev["full_grid"]["max_abs_rel_percent"], abs=1e-9)
+    assert sp["mean_abs_rel_percent"] == pytest.approx(prev["full_grid"]["mean_abs_rel_percent"], abs=1e-9)
 
 
 def test_wolfram_notebook_literals_match_record():

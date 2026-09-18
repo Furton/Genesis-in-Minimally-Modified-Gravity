@@ -31,11 +31,11 @@
   "hash_convention": "SHA-256 of LF-normalized bytes for text files (.csv/.json), raw bytes for PDF; equals the committed Git blob hashes",
   "fit_curves": {
     "coefficient_record": "data/fit_coefficients.json",
-    "coefficient_record_sha256": "0703ba480fce12292414d55c3b315042d2a740f9099e9ceaa28ba534665d5fa5",
+    "coefficient_record_sha256": "1b98b3b7a50b8aaf33e846103e0dfdc879b9d86d551a53f1b9fb39704c6b6046",
     "coefficients": {
-      "c0": 0.0167018906314,
-      "c1": -0.283027102799,
-      "q": 1.31920847627
+      "c0": 0.0139557668608,
+      "c1": -0.275286738213,
+      "q": 1.32186006083
     },
     "method": "7-point finite differences of the closed-form template in ln kappa (vcdm_genesis.fit.fit_derivatives, default step h=1e-2)"
   },
@@ -57,7 +57,7 @@
   "scipy": "1.18.0",
   "matplotlib": "3.11.0",
   "curves_csv": "spectral_index_curves.csv",
-  "curves_csv_sha256": "25301320aed2b185f219923e1aeedf53439402c2b29f6ef5e3dac2868d0fe752",
-  "n_s_pdf_sha256": "ec63866887697b4b44e9f963dad3449687d604b402c652616d49ff463bfa84b8",
-  "alpha_s_pdf_sha256": "d7d0b87ea3e1d27a894504ba069f8a2cb183f1c921069a89286eb518ffc58054"
+  "curves_csv_sha256": "e141154d4b8a308f93764b184615c4e33b053ea9b2fb76aab529b1ead0d47139",
+  "n_s_pdf_sha256": "482873d2f4f7bff01cae2716b3ed64d53ff9fc27ef24ffb664e2324dceb85eb2",
+  "alpha_s_pdf_sha256": "521242cf9b1151c7ab6460592a9d2d48e8ef93b97f855fb30eee032573be6879"
 }

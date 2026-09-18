@@ -84,10 +84,13 @@ Noise budget at the table step with `delta = 2e-9`: `1e-7` (index),
 
 Figure 5 (`figures/spectral_index_manifest.json`): 41 log-uniform `kappa`
 points per `d` plus 3 pads per side. Measured maxima of the fit-minus-numerical
-differences over the displayed range, all at `kappa = 1e-4`:
-`|Delta n_s| = 1.38e-3, 8.00e-4, 3.93e-4` and
-`|Delta alpha_s| = 1.23e-3, 1.02e-3, 7.29e-4` for `d = 0.30, 0.35, 0.40`
-(about 3 percent of `alpha_s` there). The fit therefore tracks the converged
+differences over the displayed range with the refit coefficients of
+2026-09-18, all at `kappa = 1e-4`:
+`|Delta n_s| = 1.49e-3, 8.94e-4, 4.67e-4` and
+`|Delta alpha_s| = 1.26e-3, 1.05e-3, 7.58e-4` for `d = 0.30, 0.35, 0.40`
+(3.3 to 3.5 percent of `alpha_s` there; with the coefficients of release
+1.0.0 the maxima were `1.38e-3, 8.00e-4, 3.93e-4` and
+`1.23e-3, 1.02e-3, 7.29e-4`). The fit therefore tracks the converged
 derivatives closely and no separate derivative fit is needed.
 
 ## 5. Scan table (`data/genesis_scan_table_provenance.json`)
@@ -114,51 +117,72 @@ file SHA-256 `9da89f3f3e23cf4d178c2a154bb3f9e16dbd08f5b7effa48b6f7293442f9feda`
 
 ## 6. Fit (`tests/test_fit.py`, `data/fit_coefficients.json`)
 
+The released coefficients `c0 = 0.0139557668608, c1 = -0.275286738213,
+q = 1.32186006083` are the minimax optimum of the released training set
+(refit of 2026-09-18: linear programme of `vcdm_genesis.fit.minimax_fit` on
+the training groups, solution rounded to 12 significant digits; the rounding
+changes the full-grid maximum error by `1.5e-10` percent). They supersede the
+coefficients of release 1.0.0, `c0 = 0.0167018906314, c1 = -0.283027102799,
+q = 1.31920847627`, which had been fitted to an earlier table and which the
+paper quoted at that release; on the released table those give a training
+maximum of `0.328417%` (mean `0.108564%`), a verification maximum of
+`0.327623%` (mean `0.109237%`) and a full-grid maximum of `0.328417%` (mean
+`0.108699%`). They are kept in the coefficient record for reference and are
+not used anywhere.
+
 The template reproduces the Wolfram evaluations at four stored rows to
-`1e-11` and the paper's Table 1 at the exact grid points to `2e-7`; the Python
-template agrees with the Wolfram evaluation of the same formula to `3e-14` at
-seven points, and `Analytic fit.nb` evaluates headlessly with `wolframscript`
-and reproduces `data/fit_sample_table.csv`. The grouped split (seed 1234)
-gives 409,600 / 102,400 rows and is frozen in `data/fit_split_manifest.json`.
-Per-row template residuals are checked against an independent 30-digit mpmath
-transcription of the template (53 rows, agreement `< 1e-12`).
+`1e-11` and the paper's Table 1 (`data/fit_sample_table.csv`) at the exact
+grid points to `2e-7`; the Python template agrees with the Wolfram evaluation
+of the same formula (WolframScript 1.9.0, definitions of `Analytic fit.nb`)
+to `2.7e-14` at eight points, and `Analytic fit.nb` evaluates headlessly with
+`wolframscript` and reproduces `data/fit_sample_table.csv`. The grouped split
+(seed 1234) gives 409,600 / 102,400 rows and is frozen in
+`data/fit_split_manifest.json`. Per-row template residuals are checked against
+an independent 30-digit mpmath transcription of the template (53 rows,
+agreement `< 1e-12`).
 
 Table-relative errors of the released coefficients:
 
 | set | rows | mean | median | 99th percentile | maximum | location of maximum |
 |---|---:|---:|---:|---:|---:|---|
-| training | 409,600 | 0.108564% | 0.091998% | 0.29955% | 0.328417% | `alpha0=7.69e-22, d=0.172152, kappa=1e-4` |
-| verification | 102,400 | 0.109237% | 0.093461% | 0.30468% | 0.327623% | `alpha0=7.69e-22, d=0.168354, kappa=1e-4` |
-| full grid | 512,000 | 0.108699% | 0.092237% | 0.30040% | 0.328417% | as training |
+| training | 409,600 | 0.114480% | 0.114965% | 0.26490% | 0.278080% | `alpha0=7.69e-22, d=0.172152, kappa=1e-4` |
+| verification | 102,400 | 0.114142% | 0.113932% | 0.27008% | 0.278160% | `alpha0=1e-21, d=0.175949, kappa=1e-4` |
+| full grid | 512,000 | 0.114412% | 0.114640% | 0.26529% | 0.278160% | as verification |
 
-The coefficients are fixed and are the values quoted in the paper. They are
-not the minimax optimum of the released training set: the linear programme on
-the same training groups gives `c0 = 0.0139557668608, c1 = -0.275286738213,
-q = 1.32186006083` with training maximum `0.278080%` (training mean
-`0.114480%`; full grid: maximum `0.278160%`, mean `0.114412%`). That
-alternative is recorded in the coefficient record for reference and is not
-used. The heat maps `full_loss.png` and `verification_loss.png` are produced
-from the released table by `Fitting.ipynb` (maximum over `alpha0` per
+The heat maps `full_loss.png` and `verification_loss.png` are produced from
+the released table by `Fitting.ipynb` (maximum over `alpha0` per
 `(d, kappa)` pair, in percent).
 
 ## 7. Release checks
 
 * Full test suite (`python -m pytest`): 132 tests passed on the reference
-  machine and, with Python 3.12.10, NumPy 2.4.6, SciPy 1.17.1, pandas 3.0.3,
+  machine after the refit of 2026-09-18. At release 1.0.0 the suite also
+  passed with Python 3.12.10, NumPy 2.4.6, SciPy 1.17.1, pandas 3.0.3,
   matplotlib 3.11.0, on a second Windows 11 environment.
-* Isolated copy of the tree (no repository metadata, bytecode writing
-  disabled): the full suite passed, the single-mode command reproduced R1,
-  Figure 5 curves rebuilt identical to the released data, and the documented
-  small `2x2x9` grid ran through the interrupted-and-resumed amplitude stage,
-  assembly and the derivative stage with `Ps` preserved verbatim.
+* Isolated copy of the tree at release 1.0.0 (no repository metadata, bytecode
+  writing disabled): the full suite passed, the single-mode command reproduced
+  R1, Figure 5 curves rebuilt identical to the released data, and the
+  documented small `2x2x9` grid ran through the interrupted-and-resumed
+  amplitude stage, assembly and the derivative stage with `Ps` preserved
+  verbatim.
+* Refit of 2026-09-18: `figures/n_s.pdf`, `figures/alpha_s.pdf`, their curve
+  data and manifest were regenerated on the reference machine with the new
+  coefficient record; the numerical curve rows are identical to the release
+  1.0.0 data and only the fit rows changed. `Analytic fit.nb` was re-evaluated
+  headlessly and reproduces the regenerated `data/fit_sample_table.csv`.
 * `figures/Plot_U.pdf`, its curve data and manifest were generated with
   Python 3.12.10, NumPy 2.4.6, SciPy 1.17.1, matplotlib 3.11.0; the written
   curve data agree with the elementary polynomials to `1e-11`
   (`tests/test_potential.py`).
-* `Fitting.ipynb` executed from a clean kernel without errors; the committed
-  `verification_loss.png` and `full_loss.png` are byte-identical to a
-  regeneration from the released table with the notebook's code.
-* The tree contains no personal absolute paths. Hashes of text files in the
-  manifests and provenance records are of LF-normalized bytes and equal the
-  committed Git blobs (a CRLF checkout on Windows yields different raw-file
-  hashes).
+* `Fitting.ipynb` executed from a clean kernel without errors (re-executed
+  after the refit); the committed `verification_loss.png` and `full_loss.png`
+  are byte-identical across two executions from the released table with the
+  notebook's code.
+* The tree contains no personal absolute paths. Hashes of data files in the
+  manifests and the provenance record are of LF-normalized bytes for text
+  files and raw bytes for PDFs, and equal the committed Git blobs (a CRLF
+  checkout on Windows yields different raw-file hashes). The scan-time code
+  hashes in the provenance record are of the working tree at scan time:
+  `background.py` (LF) and `modes.py` (CRLF at run) match the released
+  modules; `spectra.py` and `table.py` were modified after the scan and their
+  scan-time versions are not in the repository (see `code_hash_note` there).
