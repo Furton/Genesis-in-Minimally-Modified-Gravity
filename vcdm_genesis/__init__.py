@@ -11,5 +11,3 @@ derivatives  spectral index and running from converged log-power samples
 table        resumable amplitude/derivative table generator (CLI)
 fit          phenomenological amplitude template and coefficient record
 """
-
-__version__ = "1.0.0"

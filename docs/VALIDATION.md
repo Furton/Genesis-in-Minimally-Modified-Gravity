@@ -1,4 +1,4 @@
-# Validation record (version 1.0.0)
+# Validation record
 
 Every number below was produced by the code in this repository on the
 reference machine (Intel Core i7-14700, Windows 11, Python 3.14.6,
@@ -33,8 +33,9 @@ coordinates. Visual inspection of `figures/Plot_U.pdf`: three curves,
 correct plateaus, endpoint markers at `y = 4, 6, 8`, dashed beyond-Genesis
 extension, tails resolved to `1e-12`, axis labels correct; the figure carries
 no legend (the paper's caption describes the curves; `--legend` adds one).
-Curve values computed with SciPy 1.18.0 and 1.17.1 differ by at most
-`3.6e-15` relative (75 of 4803 samples).
+The released curve data were generated on the reference machine (SciPy
+1.18.0) on 2026-09-18; they differ from an earlier SciPy 1.17.1 generation by
+at most `3.6e-15` relative (75 of 4803 samples).
 
 ## 3. Mode solver (`tests/test_modes.py`, `tests/test_regression_fixture.py`)
 
@@ -88,8 +89,8 @@ differences over the displayed range with the refit coefficients of
 2026-09-18, all at `kappa = 1e-4`:
 `|Delta n_s| = 1.49e-3, 8.94e-4, 4.67e-4` and
 `|Delta alpha_s| = 1.26e-3, 1.05e-3, 7.58e-4` for `d = 0.30, 0.35, 0.40`
-(3.3 to 3.5 percent of `alpha_s` there; with the coefficients of release
-1.0.0 the maxima were `1.38e-3, 8.00e-4, 3.93e-4` and
+(3.3 to 3.5 percent of `alpha_s` there; with the previous coefficients
+the maxima were `1.38e-3, 8.00e-4, 3.93e-4` and
 `1.23e-3, 1.02e-3, 7.29e-4`). The fit therefore tracks the converged
 derivatives closely and no separate derivative fit is needed.
 
@@ -122,9 +123,10 @@ q = 1.32186006083` are the minimax optimum of the released training set
 (refit of 2026-09-18: linear programme of `vcdm_genesis.fit.minimax_fit` on
 the training groups, solution rounded to 12 significant digits; the rounding
 changes the full-grid maximum error by `1.5e-10` percent). They supersede the
-coefficients of release 1.0.0, `c0 = 0.0167018906314, c1 = -0.283027102799,
-q = 1.31920847627`, which had been fitted to an earlier table and which the
-paper quoted at that release; on the released table those give a training
+previous coefficients (released 2026-09-17), `c0 = 0.0167018906314,
+c1 = -0.283027102799, q = 1.31920847627`, which had been fitted to an
+earlier table and which the paper quoted at the time; on the released table
+those give a training
 maximum of `0.328417%` (mean `0.108564%`), a verification maximum of
 `0.327623%` (mean `0.109237%`) and a full-grid maximum of `0.328417%` (mean
 `0.108699%`). They are kept in the coefficient record for reference and are
@@ -156,10 +158,10 @@ the released table by `Fitting.ipynb` (maximum over `alpha0` per
 ## 7. Release checks
 
 * Full test suite (`python -m pytest`): 132 tests passed on the reference
-  machine after the refit of 2026-09-18. At release 1.0.0 the suite also
+  machine after the refit of 2026-09-18. Before the refit the suite also
   passed with Python 3.12.10, NumPy 2.4.6, SciPy 1.17.1, pandas 3.0.3,
   matplotlib 3.11.0, on a second Windows 11 environment.
-* Isolated copy of the tree at release 1.0.0 (no repository metadata, bytecode
+* Isolated copy of the tree before the refit (no repository metadata, bytecode
   writing disabled): the full suite passed, the single-mode command reproduced
   R1, Figure 5 curves rebuilt identical to the released data, and the
   documented small `2x2x9` grid ran through the interrupted-and-resumed
@@ -167,13 +169,16 @@ the released table by `Fitting.ipynb` (maximum over `alpha0` per
   verbatim.
 * Refit of 2026-09-18: `figures/n_s.pdf`, `figures/alpha_s.pdf`, their curve
   data and manifest were regenerated on the reference machine with the new
-  coefficient record; the numerical curve rows are identical to the release
-  1.0.0 data and only the fit rows changed. `Analytic fit.nb` was re-evaluated
+  coefficient record; the numerical curve rows are identical to the previously
+  released data and only the fit rows changed. `Analytic fit.nb` was re-evaluated
   headlessly and reproduces the regenerated `data/fit_sample_table.csv`.
-* `figures/Plot_U.pdf`, its curve data and manifest were generated with
-  Python 3.12.10, NumPy 2.4.6, SciPy 1.17.1, matplotlib 3.11.0; the written
-  curve data agree with the elementary polynomials to `1e-11`
-  (`tests/test_potential.py`).
+* `figures/Plot_U.pdf`, its curve data and manifest were regenerated on the
+  reference machine on 2026-09-18 (Python 3.14.6, NumPy 2.5.1, SciPy 1.18.0,
+  matplotlib 3.11.0); the written curve data agree with the elementary
+  polynomials to `1e-11` (`tests/test_potential.py`).
+* On 2026-09-18 all figure PDFs were regenerated without a generator version
+  in their metadata; the Figure 5 curve data are identical to the previous
+  files, and the Figure 1 curve data are described in section 2.
 * `Fitting.ipynb` executed from a clean kernel without errors (re-executed
   after the refit); the committed `verification_loss.png` and `full_loss.png`
   are byte-identical across two executions from the released table with the

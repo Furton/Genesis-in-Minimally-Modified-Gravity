@@ -31,7 +31,7 @@
   "hash_convention": "SHA-256 of LF-normalized bytes for text files (.csv/.json), raw bytes for PDF; equals the committed Git blob hashes",
   "fit_curves": {
     "coefficient_record": "data/fit_coefficients.json",
-    "coefficient_record_sha256": "1b98b3b7a50b8aaf33e846103e0dfdc879b9d86d551a53f1b9fb39704c6b6046",
+    "coefficient_record_sha256": "5dda2791541dd4136994455e45aea20bebf0c0dad95888f46aeda379e32545ee",
     "coefficients": {
       "c0": 0.0139557668608,
       "c1": -0.275286738213,
@@ -51,13 +51,12 @@
     "note": "separate marginal benchmarks, drawn as in the manuscript"
   },
   "generator": "vcdm_genesis.figures.spectral_index",
-  "generator_version": "1.0.0",
   "python": "3.14.6",
   "numpy": "2.5.1",
   "scipy": "1.18.0",
   "matplotlib": "3.11.0",
   "curves_csv": "spectral_index_curves.csv",
   "curves_csv_sha256": "e141154d4b8a308f93764b184615c4e33b053ea9b2fb76aab529b1ead0d47139",
-  "n_s_pdf_sha256": "482873d2f4f7bff01cae2716b3ed64d53ff9fc27ef24ffb664e2324dceb85eb2",
-  "alpha_s_pdf_sha256": "521242cf9b1151c7ab6460592a9d2d48e8ef93b97f855fb30eee032573be6879"
+  "n_s_pdf_sha256": "caabc42632fd1afb3168fa611e6dbbc1d815a47943a5d8c6e2aff1fe56eb7876",
+  "alpha_s_pdf_sha256": "273cccdb8c456a5fb0e0e495179e4fc67c9a889024972cf89d5c491f99da9600"
 }

@@ -1,6 +1,5 @@
 {
   "file": "genesis_scan_table.csv",
-  "release": "1.0.0",
   "date": "2026-09-17",
   "sha256": "9da89f3f3e23cf4d178c2a154bb3f9e16dbd08f5b7effa48b6f7293442f9feda",
   "schema": "alpha,d,kappa,Ps,ns,alpha_s (alpha-major, d, kappa-minor; 512000 rows; coordinates in data/grid_axes.json)",
@@ -8,7 +7,6 @@
     "meaning": "S_R = b^2 M_Pl^2 P_R = kappa^3/(2 pi^2) |u_hat/z|^2 at x_final (dimensionless)",
     "x_final": 1e-07,
     "backend": "python:scipy.integrate.solve_ivp/DOP853 exact-coefficient scalar mode solver (vcdm_genesis.modes)",
-    "package_version": "1.0.0",
     "python": "3.14.6",
     "numpy": "2.5.1",
     "scipy": "1.18.0",

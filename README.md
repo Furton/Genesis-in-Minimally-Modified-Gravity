@@ -2,7 +2,7 @@
 
 Numerical scan, analytic fit and figures for the scalar power spectrum of
 *Genesis in Minimally Modified Gravity* (Genesis in the VCDM theory).
-Version 1.0.0 (2026-09-17).
+Scan table released 2026-09-17; fit coefficients refit 2026-09-18.
 
 All results describe the Genesis segment only (`0 < y <= 2(1+d)/d`; spectra
 are evaluated at the endpoint `x_f = 1e-7`). Conventions follow the paper:
@@ -70,7 +70,7 @@ Template and coefficients: `data/fit_coefficients.json` (`c0 = 0.0139557668608`,
 `c1 = -0.275286738213`, `q = 1.32186006083`), the minimax optimum of the
 released training set (refit of 2026-09-18; linear programme of
 `vcdm_genesis.fit.minimax_fit`, rounded to 12 significant digits). They
-supersede the coefficients of release 1.0.0 (`c0 = 0.0167018906314`,
+supersede the previous coefficients (`c0 = 0.0167018906314`,
 `c1 = -0.283027102799`, `q = 1.31920847627`), which had been fitted to an
 earlier table and give a maximum error of 0.328 percent (mean 0.109 percent)
 on the released table; those values are kept in the coefficient record for
@@ -104,10 +104,9 @@ the regression points to `2e-6` (target) with measured differences below
 
 Environment: Python 3.11 or newer with `numpy`, `scipy`, `pandas`,
 `matplotlib` (`pip install -r requirements.txt`; tests also need `pytest` and
-`mpmath`). The scan table, Figure 5 and the heat maps were produced with
-Python 3.14.6, NumPy 2.5.1, SciPy 1.18.0, matplotlib 3.11.0, and Figure 1
-with Python 3.12.10, NumPy 2.4.6, SciPy 1.17.1, matplotlib 3.11.0, all on
-Windows 11; Linux is untested.
+`mpmath`). The scan table, the figures and the heat maps were produced with
+Python 3.14.6, NumPy 2.5.1, SciPy 1.18.0, matplotlib 3.11.0 on Windows 11;
+Linux is untested.
 
 ```bash
 python -m pytest                                                   # full test suite

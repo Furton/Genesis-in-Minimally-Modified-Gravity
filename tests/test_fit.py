@@ -131,7 +131,7 @@ def test_grouped_split_and_residuals_reproduce_notebook_statistics():
         assert coeffs[k] == pytest.approx(lp[k], abs=1e-7)
         assert coeffs[k] == pytest.approx(fit.RELEASED_COEFFICIENTS[k], abs=1e-7)
     assert 100 * np.expm1(t) == pytest.approx(lp["max_abs_rel_percent_training"], abs=2e-5)
-    # the superseded coefficients of release 1.0.0 are kept in the record for reference only
+    # the superseded previous coefficients are kept in the record for reference only
     prev = COEFFS["previous_coefficients"]
     assert prev["adopted"] is False
     sp = fit.evaluate_fit(alpha, d, kappa, ps, prev)

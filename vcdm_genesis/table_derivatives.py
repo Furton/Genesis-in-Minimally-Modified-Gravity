@@ -32,7 +32,6 @@ from pathlib import Path
 
 import numpy as np
 
-from . import __version__
 from .derivatives import derivative_columns, derivatives_uniform, noise_budget
 from .modes import SolverConfig, X_FINAL_PAPER
 from .table import (_atomic_write_text, audit_records, keys_from_points, read_chunks, read_manifest,
@@ -136,7 +135,7 @@ def run_derivative_stage(amplitudes: Path, workdir: Path, output: Path, processe
                     w.writerow([repr(a), repr(dd), repr(k), Ps_str[(i, j, m)], repr(float(ns[i, j, m])), repr(float(als[i, j, m]))])
     os.replace(tmp, output)
     manifest = {
-        "stage": "derivatives", "package_version": __version__, "input_amplitudes": str(amplitudes),
+        "stage": "derivatives", "input_amplitudes": str(amplitudes),
         "input_amplitudes_sha256": hashlib.sha256(Path(amplitudes).read_bytes()).hexdigest(),
         "output": str(output), "output_sha256": hashlib.sha256(output.read_bytes()).hexdigest(),
         "grid": {"n_alpha": nA, "n_d": nD, "n_kappa": nK, "h_ln_kappa": h},

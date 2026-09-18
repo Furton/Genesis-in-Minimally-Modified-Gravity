@@ -46,7 +46,6 @@ from pathlib import Path
 
 import numpy as np
 
-from . import __version__
 from .modes import SolverConfig, X_FINAL_PAPER, evolve_scalar_mode
 
 SCHEMA_VERSION = 1
@@ -159,7 +158,7 @@ def run_amplitudes(outdir: Path, keys, key_spec: dict, x_final: float, cfg: Solv
     manifest = read_manifest(outdir)
     if manifest is None:
         manifest = {
-            "schema_version": SCHEMA_VERSION, "fingerprint": fp, "backend": BACKEND, "package_version": __version__,
+            "schema_version": SCHEMA_VERSION, "fingerprint": fp, "backend": BACKEND,
             "python": sys.version.split()[0], "numpy": np.__version__, "scipy": __import__("scipy").__version__,
             "platform": platform.platform(), "x_final": x_final, "solver_config": cfg.to_dict(),
             "key_spec": key_spec, "n_keys": len(keys), "chunk_size": chunk_size, "code_sha256": code_hashes(),

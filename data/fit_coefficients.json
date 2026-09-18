@@ -7,7 +7,7 @@
   "status": "released",
   "refit_date": "2026-09-18",
   "fit_method": "minimax (maximum absolute log-error) linear-programming fit of the residual c0 + c1 d + q ln C_nu on the training groups of the grouped (d,kappa) split (seed 1234, 80 percent training; Fitting.ipynb, vcdm_genesis.fit.minimax_fit); the linear-programme solution is rounded to 12 significant digits",
-  "note": "The released coefficients are the minimax optimum of the released training set (refit of 2026-09-18, vcdm_genesis.fit.minimax_fit on the training groups of the grouped split), rounded to 12 significant digits; the full-precision solution is recorded under lp_solution. They supersede the coefficients of release 1.0.0, which had been fitted to an earlier table; those are kept under previous_coefficients for reference and are not used anywhere.",
+  "note": "The released coefficients are the minimax optimum of the released training set (refit of 2026-09-18, vcdm_genesis.fit.minimax_fit on the training groups of the grouped split), rounded to 12 significant digits; the full-precision solution is recorded under lp_solution. They supersede the previous coefficients (released 2026-09-17), which had been fitted to an earlier table; those are kept under previous_coefficients for reference and are not used anywhere.",
   "lp_solution": {
     "c0": 0.013955766860785196,
     "c1": -0.27528673821327504,
@@ -52,7 +52,7 @@
     "c0": 0.0167018906314,
     "c1": -0.283027102799,
     "q": 1.31920847627,
-    "release": "1.0.0 (2026-09-17)",
+    "date": "2026-09-17",
     "training": {
       "mean_abs_rel_percent": 0.10856403771692741,
       "max_abs_rel_percent": 0.32841702320234645
@@ -68,6 +68,6 @@
       "max_abs_rel_percent": 0.32841702320234645
     },
     "adopted": false,
-    "note": "coefficients of release 1.0.0, fitted to an earlier table and quoted in the paper at that release; table-relative errors above are against the released table; superseded by the refit of 2026-09-18, kept for reference and not used anywhere"
+    "note": "coefficients released on 2026-09-17, fitted to an earlier table and quoted in the paper at that time; table-relative errors above are against the released table; superseded by the refit of 2026-09-18, kept for reference and not used anywhere"
   }
 }

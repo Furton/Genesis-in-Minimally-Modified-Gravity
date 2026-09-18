@@ -10,7 +10,7 @@ Outputs (in ``--outdir``):
 * ``Plot_U_curves.csv``     columns ``d, y, U_hat, in_genesis_segment`` (every curve
                             contains its endpoint ``y = C = 2(1+d)/d`` exactly)
 * ``Plot_U_manifest.json``  formula, normalization, d values, range, sample count,
-                            generator version, library versions and SHA-256 of the
+                            library versions and SHA-256 of the
                             data and PDF
 
 Presentation: log-log axes, horizontal ``y``, vertical ``tau_B^2 U/chi_1^2``.
@@ -32,7 +32,6 @@ from pathlib import Path
 
 import numpy as np
 
-from .. import __version__
 from ..potential import D_MAX, D_MIN, U_hat, d_label, genesis_endpoint, plateau
 
 DEFAULT_D = (1.0, 0.5, 1.0 / 3.0)
@@ -108,7 +107,7 @@ def render(curves, pdf_path: Path, legend: bool = False) -> None:
     ax.grid(True, which="minor", lw=0.2, alpha=0.25)
     fig.tight_layout()
     tmp = pdf_path.with_suffix(".tmp.pdf")
-    fig.savefig(tmp, format="pdf", metadata={"Creator": f"vcdm_genesis {__version__} plot_u", "CreationDate": None})
+    fig.savefig(tmp, format="pdf", metadata={"Creator": "vcdm_genesis plot_u", "CreationDate": None})
     plt.close(fig)
     tmp.replace(pdf_path)
 
@@ -139,7 +138,6 @@ def write_manifest(path: Path, curves, args, csv_path: Path, pdf_path: Path) -> 
         "samples_written_per_curve": [int(len(c["y"])) for c in curves],
         "legend": bool(args.legend),
         "generator": "vcdm_genesis.figures.plot_u",
-        "generator_version": __version__,
         "python": sys.version.split()[0],
         "numpy": np.__version__, "scipy": scipy.__version__, "matplotlib": matplotlib.__version__,
         "hash_convention": "SHA-256 of LF-normalized bytes for text files (.csv/.json), raw bytes for PDF; equals the committed Git blob hashes",

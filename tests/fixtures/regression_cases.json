@@ -1,6 +1,5 @@
 {
   "description": "Compact regression fixture: prior independent reference values and the values reproduced by this release's solver (vcdm_genesis.modes) with the default SolverConfig. Dimensionless powers S_R = b^2 M_Pl^2 P_R, S_h = b^2 M_Pl^2 P_h.",
-  "generator_version": "1.0.0",
   "solver_config": {
     "pump_ratio_min": 100000.0,
     "tensor_pump_ratio_min": 10000000.0,

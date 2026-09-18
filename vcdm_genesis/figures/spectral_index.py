@@ -31,7 +31,6 @@ from pathlib import Path
 
 import numpy as np
 
-from .. import __version__
 from ..derivatives import derivative_columns, noise_budget
 from ..fit import COEFFICIENT_FILE, fit_derivatives, load_coefficients
 from ..modes import SolverConfig, X_FINAL_PAPER, evolve_scalar_mode
@@ -101,7 +100,7 @@ def render(num, fitc, ds, outdir: Path):
         ax.legend(fontsize=7.5, loc="lower left", ncol=1)
         fig.tight_layout()
         tmp = outdir / (fname + ".tmp.pdf")
-        fig.savefig(tmp, format="pdf", metadata={"Creator": f"vcdm_genesis {__version__} spectral_index", "CreationDate": None})
+        fig.savefig(tmp, format="pdf", metadata={"Creator": "vcdm_genesis spectral_index", "CreationDate": None})
         plt.close(fig)
         tmp.replace(outdir / fname)
 
@@ -159,7 +158,7 @@ def main(argv=None):
                        "coefficients": {k: coeffs[k] for k in ("c0", "c1", "q")},
                        "method": "7-point finite differences of the closed-form template in ln kappa (vcdm_genesis.fit.fit_derivatives, default step h=1e-2)"},
         "planck_bands": {"n_s": PLANCK_NS, "alpha_s": PLANCK_AS, "note": "separate marginal benchmarks, drawn as in the manuscript"},
-        "generator": "vcdm_genesis.figures.spectral_index", "generator_version": __version__,
+        "generator": "vcdm_genesis.figures.spectral_index",
         "python": sys.version.split()[0], "numpy": np.__version__, "scipy": scipy.__version__, "matplotlib": matplotlib.__version__,
         "curves_csv": curves.name, "curves_csv_sha256": sha256_of(curves),
         "n_s_pdf_sha256": sha256_of(a.outdir / "n_s.pdf"), "alpha_s_pdf_sha256": sha256_of(a.outdir / "alpha_s.pdf"),

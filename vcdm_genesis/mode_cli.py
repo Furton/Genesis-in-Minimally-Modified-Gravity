@@ -25,7 +25,6 @@ from pathlib import Path
 
 import numpy as np
 
-from . import __version__
 from .modes import (SolverConfig, X_FINAL_PAPER, convergence_study, evolve_curvature_mode,
                     evolve_scalar_mode, evolve_tensor_mode)
 
@@ -118,7 +117,6 @@ def cmd_single(a):
     r = fn(a.kappa, a.alpha0, a.d, x_ini=a.x_ini, x_final=a.x_final, cfg=cfg)
     rec = r.to_record()
     rec["seconds"] = time.perf_counter() - t0
-    rec["version"] = __version__
     out = a.outdir / f"mode_a{a.alpha0:.6e}_d{a.d:.10g}_k{a.kappa:.6e}_xf{a.x_final:g}_{a.formulation}.json"
     _write_json(out, rec)
     print(f"S_R = {r.S_R:.12e}  x_ini = {r.x_ini:.6e}  nfev = {r.nfev}  ({rec['seconds']:.2f} s)  -> {out}")
@@ -131,7 +129,6 @@ def cmd_converge(a):
     res = convergence_study(a.kappa, a.alpha0, a.d, x_final=a.x_final, cfg=cfg)
     rec = {k: (v.to_record() if hasattr(v, "to_record") else v) for k, v in res.items()}
     rec["seconds"] = time.perf_counter() - t0
-    rec["version"] = __version__
     out = a.outdir / f"converge_a{a.alpha0:.6e}_d{a.d:.10g}_k{a.kappa:.6e}_xf{a.x_final:g}.json"
     _write_json(out, rec)
     print(f"S_R = {res['S_R']:.12e}  d(x_ini x2) = {res['rel_change_x_ini']:.3e}  d(rtol/10) = {res['rel_change_rtol']:.3e}  "
@@ -145,7 +142,7 @@ def cmd_tensor(a):
     r = evolve_tensor_mode(a.kappa, a.d, x_ini=a.x_ini, x_final=a.x_final, cfg=cfg)
     rec = {"kappa": r.kappa, "d": r.d, "x_ini": r.x_ini, "x_final": r.x_final, "S_h": r.S_h, "a_final": r.a_final,
            "u_final": [r.u_final.real, r.u_final.imag], "nfev": r.nfev, "n_steps": r.n_steps, "selection": r.selection,
-           "config": r.config, "seconds": time.perf_counter() - t0, "version": __version__}
+           "config": r.config, "seconds": time.perf_counter() - t0}
     out = a.outdir / f"tensor_d{a.d:.10g}_k{a.kappa:.6e}_xf{a.x_final:g}.json"
     _write_json(out, rec)
     print(f"S_h = {r.S_h:.12e}  x_ini = {r.x_ini:.6e}  nfev = {r.nfev}  -> {out}")
@@ -183,7 +180,7 @@ def cmd_benchmark(a):
     proj_hours_p90 = n_full * p90 / (procs * max(eff, 1e-6)) / 3600.0
     proj_hours_max = n_full * mx / (procs * max(eff, 1e-6)) / 3600.0
     report = {
-        "version": __version__, "python": sys.version.split()[0], "platform": platform.platform(),
+        "python": sys.version.split()[0], "platform": platform.platform(),
         "cpu_count": os.cpu_count(), "processes": procs, "rtol": a.rtol, "x_final": a.x_final,
         "sample_size": len(items), "sample_names": [it[0] for it in items],
         "serial": {"wall_seconds": serial_wall, "mean_seconds": mean_s, "median_seconds": med_s,
