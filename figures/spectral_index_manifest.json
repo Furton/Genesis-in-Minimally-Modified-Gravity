@@ -51,12 +51,12 @@
     "note": "separate marginal benchmarks, drawn as in the manuscript"
   },
   "generator": "vcdm_genesis.figures.spectral_index",
-  "python": "3.14.6",
-  "numpy": "2.5.1",
-  "scipy": "1.18.0",
+  "python": "3.12.10",
+  "numpy": "2.4.6",
+  "scipy": "1.17.1",
   "matplotlib": "3.11.0",
   "curves_csv": "spectral_index_curves.csv",
-  "curves_csv_sha256": "e141154d4b8a308f93764b184615c4e33b053ea9b2fb76aab529b1ead0d47139",
-  "n_s_pdf_sha256": "caabc42632fd1afb3168fa611e6dbbc1d815a47943a5d8c6e2aff1fe56eb7876",
-  "alpha_s_pdf_sha256": "273cccdb8c456a5fb0e0e495179e4fc67c9a889024972cf89d5c491f99da9600"
+  "curves_csv_sha256": "d643beaf954925994908e47cd7d29f900cbebe31d1762916ca60b1f51c5686f0",
+  "n_s_pdf_sha256": "7143941e5ee3571350eae646f2451df071322e596c255caef052d8ad7e19e46f",
+  "alpha_s_pdf_sha256": "7acb0bbde9da894540a240ce30fd052d2529e2c003cb1d5a7fcd687d0fc9c514"
 }

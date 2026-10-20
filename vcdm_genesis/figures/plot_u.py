@@ -2,7 +2,7 @@
 
 Headless, deterministic regeneration::
 
-    python -m vcdm_genesis.figures.plot_u --outdir figures
+    python -m vcdm_genesis.figures.plot_u --outdir figures --legend
 
 Outputs (in ``--outdir``):
 
@@ -17,7 +17,7 @@ Presentation: log-log axes, horizontal ``y``, vertical ``tau_B^2 U/chi_1^2``.
 The Genesis segment ``0 < y <= C`` is drawn solid; the potential *function*
 beyond the endpoint (``y > C``) is drawn dashed and lighter, because no
 post-Genesis trajectory is computed here.  Endpoints are marked.  No legend
-is drawn (the caption of the paper describes the curves); ``--legend`` adds one.
+is drawn by default; the paper's figure uses ``--legend`` to identify the curves.
 The default range ``0.01 <= y <= 32`` with 1600 logarithmic samples is the
 configuration of the paper's Figure 1.
 """
@@ -92,12 +92,7 @@ def render(curves, pdf_path: Path, legend: bool = False) -> None:
                       "--", color=col, lw=1.2, alpha=0.6)
         ax.plot([c["C"]], [U_hat(c["C"], c["d"])], "o", color=col, ms=5.5, zorder=5)
     if legend:
-        from matplotlib.lines import Line2D
-        handles, labels = ax.get_legend_handles_labels()
-        handles += [Line2D([], [], color="0.35", ls="--", lw=1.2, alpha=0.8),
-                    Line2D([], [], color="0.35", marker="o", ls="", ms=5.5)]
-        labels += ["potential function for $y>2(1+d)/d$ (beyond Genesis)", "Genesis endpoint $y=2(1+d)/d$"]
-        ax.legend(handles, labels, loc="lower left", fontsize=8.5, frameon=True)
+        ax.legend(loc="lower left", fontsize=14, frameon=True)
     ax.set_xlabel(r"$y$")
     ax.set_ylabel(r"$\tau_B^{2}\,U/\chi_1^{2}$")
     allU = np.concatenate([c["U"] for c in curves])
@@ -158,7 +153,7 @@ def parse_args(argv=None):
     ap.add_argument("--ymin", type=float, default=DEFAULT_YMIN)
     ap.add_argument("--ymax", type=float, default=DEFAULT_YMAX)
     ap.add_argument("--d", type=float, action="append", help="shape parameter (repeatable); default 1, 1/2, 1/3")
-    ap.add_argument("--legend", action="store_true", help="draw a legend (the paper's figure has none)")
+    ap.add_argument("--legend", action="store_true", help="draw a legend identifying the curves")
     return ap.parse_args(argv)
 
 

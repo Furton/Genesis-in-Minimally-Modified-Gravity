@@ -51,9 +51,10 @@ on the bracket `x * {1/2, 1/sqrt2, 1, sqrt2, 2}`**:
 `omega^2 > 0`, `|c_R^2 - 1| <= 1e-3`, `|c_R^2| kappa^2 >= 1e5 |z_xx/z|`
 (tensors: `1e7`), `|Omega_x|/Omega^2 <= 1e-3`. The bracket rejects spurious
 passes caused by a zero of the pump: a test at a single time followed by a
-fixed multiplier can land on such a zero (the R6 case in
-`docs/VALIDATION.md`). If nothing passes, `SelectionError` is raised; the
-search cap is never returned as a valid start.
+fixed multiplier can land on such a zero (the R6 regression case in
+`tests/test_modes.py` and `tests/fixtures/regression_cases.json`). If nothing
+passes, `SelectionError` is raised; the search cap is never returned as a valid
+start.
 
 An independent formulation, `R_xx + (ln z^2)_x R_x + c_R^2 kappa^2 R = 0`
 for `R = u/z` (no pump term), agrees with the canonical evolution to
@@ -105,7 +106,7 @@ canonical matter equation and the elementary polynomials for `d = 1, 1/2, 1/3`
 ## Reproduction
 
     python -m pytest                                              # full test suite
-    python -m vcdm_genesis.figures.plot_u --outdir figures        # Figure 1
+    python -m vcdm_genesis.figures.plot_u --outdir figures --legend # Figure 1
     python -m vcdm_genesis.figures.spectral_index --outdir figures --processes 8   # Figure 5
     python -m vcdm_genesis.mode_cli single --alpha0 1e-23 --d 0.3 --kappa 1e-7 --x-final 0 --outdir out
     python -m vcdm_genesis.table amplitudes --outdir out/small --alpha0 3e-27 7e-24 --d 0.22 0.33 --kappa-logspace 1e-8 1e-5 9

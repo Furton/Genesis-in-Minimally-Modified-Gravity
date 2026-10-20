@@ -23,7 +23,7 @@ def test_template_matches_wolfram_notebook_saved_values():
     """Cross-representation check against the Wolfram evaluation of the same template.
 
     The four rows were evaluated with WolframScript 1.9.0 from the definitions of 'Analytic fit.nb'
-    (refit coefficients of 2026-09-18); the Python template agrees with them to 3e-14 (docs/VALIDATION.md).
+    (refit coefficients of 2026-09-18); the Python template agrees with them to 3e-14.
     """
     cases = [
         (2.3285662984981965e-29, 0.14177215189873418, 2.196707090793235e-7, 1.1239216240945546e+23),

@@ -87,8 +87,9 @@ def render(num, fitc, ds, outdir: Path):
                    label=rf"Planck $1\sigma$ ({band[0]:.4f} $\pm$ {band[1]:.4f})")
         for i, d in enumerate(ds):
             col = colors[i % len(colors)]
-            ax.semilogx(num[d]["kappa"], num[d][key], "-", color=col, lw=1.7, label=f"$d = {d:.2f}$ numerical")
-            ax.semilogx(fitc[d]["kappa"], fitc[d][key], "--", color=col, lw=1.3, label=f"$d = {d:.2f}$ fit")
+            light_col = tuple(0.75 * c + 0.25 for c in matplotlib.colors.to_rgb(col))
+            ax.semilogx(num[d]["kappa"], num[d][key], "-", color=light_col, lw=2.4, label=f"$d = {d:.2f}$ numerical")
+            ax.semilogx(fitc[d]["kappa"], fitc[d][key], color=col, linestyle=(0, (6, 4)), lw=1.5, label=f"$d = {d:.2f}$ fit")
         if key == "n_s":
             ax.axhline(1.0, color="0.5", lw=0.6, ls=":")
         else:

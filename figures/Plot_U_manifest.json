@@ -33,16 +33,16 @@
     1601,
     1601
   ],
-  "legend": false,
+  "legend": true,
   "generator": "vcdm_genesis.figures.plot_u",
-  "python": "3.14.6",
-  "numpy": "2.5.1",
-  "scipy": "1.18.0",
+  "python": "3.12.10",
+  "numpy": "2.4.6",
+  "scipy": "1.17.1",
   "matplotlib": "3.11.0",
   "hash_convention": "SHA-256 of LF-normalized bytes for text files (.csv/.json), raw bytes for PDF; equals the committed Git blob hashes",
   "curves_csv": "Plot_U_curves.csv",
-  "curves_csv_sha256": "5d8123d4d95da94034d02d2f18d59834545d23c8f1c134c2e7f91efcbc282e8f",
+  "curves_csv_sha256": "8eff07356fb98072285f5f45a7e86013803bb643e235d416231cfdffed097ce2",
   "pdf": "Plot_U.pdf",
-  "pdf_sha256": "1a5c724368766e15de43c22d4f6c9ec9ac05e084cf6baa23e8486efd9ef88696",
+  "pdf_sha256": "5afb07e03e3d0fa7ecb3787a0d122cae24eceea65f01ff638f7fa45399a78209",
   "note": "PDF bytes may differ across matplotlib/font versions; compare curve data and rendered content."
 }

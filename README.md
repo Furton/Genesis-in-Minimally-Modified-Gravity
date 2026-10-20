@@ -24,13 +24,13 @@ column `alpha` of the data files is `alpha0`.
 | `Fitting.ipynb` | fit validation, train/verification split and error heat maps (uses `vcdm_genesis.fit`) |
 | `Analytic fit.nb` | Wolfram notebook with the same template and the four sample points |
 | `verification_loss.png`, `full_loss.png` | fit error heat maps of the paper's appendix (maximum over `alpha0` per `(d, kappa)` pair, percent) |
-| `docs/` | numerical methods and validation record |
+| `docs/` | numerical methods |
 
 ## Correspondence with the paper
 
 | paper | repository |
 |---|---|
-| Figure 1 (`fig:Matter_Potential`), reconstructed matter potential `U(y)` | `figures/Plot_U.pdf`; `python -m vcdm_genesis.figures.plot_u`; `vcdm_genesis/potential.py` |
+| Figure 1 (`fig:Matter_Potential`), reconstructed matter potential `U(y)` | `figures/Plot_U.pdf`; `python -m vcdm_genesis.figures.plot_u --legend`; `vcdm_genesis/potential.py` |
 | Section 3, vacuum initial conditions and endpoint spectra | `vcdm_genesis/modes.py`; `python -m vcdm_genesis.mode_cli` |
 | `80^3` scan of the scalar amplitude | `genesis_scan_table.csv`; `python -m vcdm_genesis.table` |
 | Figure 5 (`fig:Spectral_Index_and_running`), `n_s` and `alpha_s` | `figures/n_s.pdf`, `figures/alpha_s.pdf`; `python -m vcdm_genesis.figures.spectral_index` |
@@ -89,7 +89,7 @@ together (seed 1234, 80 percent training; 409,600 / 102,400 rows;
 These are **errors relative to the numerical table** (fraction convention:
 0.2782 percent = 0.002782); they are not integration-error estimates. The
 integration accuracy of the underlying histories is characterized separately
-in `docs/VALIDATION.md` (relative power changes below `2e-8` under
+in `docs/NUMERICAL_METHODS.md` (relative power changes below `2e-8` under
 initial-time doubling, `7e-10` under tolerance tightening, agreement
 `2.4e-10` between two formulations on the regression fixture; every returned
 start time passes the vacuum checks). The derivative columns are validated at
@@ -104,13 +104,17 @@ the regression points to `2e-6` (target) with measured differences below
 
 Environment: Python 3.11 or newer with `numpy`, `scipy`, `pandas`,
 `matplotlib` (`pip install -r requirements.txt`; tests also need `pytest` and
-`mpmath`). The scan table, the figures and the heat maps were produced with
+`mpmath`). The scan table and original figures and heat maps were produced with
 Python 3.14.6, NumPy 2.5.1, SciPy 1.18.0, matplotlib 3.11.0 on Windows 11;
 Linux is untested.
+Figures 1, 5 and 7 were regenerated on 2026-10-20 using Python 3.12.10,
+NumPy 2.4.6, SciPy 1.17.1 and matplotlib 3.11.0. The plot generators and
+fitting-notebook code cells were rerun, including the numerical mode evolution for
+Figure 5. The released scan table and fit coefficient record are unchanged.
 
 ```bash
 python -m pytest                                                   # full test suite
-python -m vcdm_genesis.figures.plot_u --outdir figures             # Figure 1
+python -m vcdm_genesis.figures.plot_u --outdir figures --legend    # Figure 1
 python -m vcdm_genesis.figures.spectral_index --outdir figures --processes 8   # Figure 5
 python -m vcdm_genesis.mode_cli single --alpha0 1e-23 --d 0.3 --kappa 1e-7 --x-final 0 --outdir out
 python -m vcdm_genesis.mode_cli converge --alpha0 1e-30 --d 0.13417721518987344 --kappa 1.2263306841775643e-07 --outdir out

@@ -1,6 +1,6 @@
 """Vacuum selection, initial data, mode evolution: regression cases and convergence.
 
-Reference values (prior independent computations, see the validation record):
+Reference values (prior independent computations, stored in tests/fixtures/regression_cases.json):
     R1  d=0.3, alpha0=1e-23, kappa=1e-7, x_f=0            S_R ~ 6.91139484127e19
     R2  R1 at both endpoints                               S_R(1e-7)/S_R(0) ~ 0.9999999773106846, d ln|R|/dx(0) ~ -0.1134465522
     R5  d=0.5, kappa=1e-7 (tensor)                         S_h ~ 2.0196314518e-15
