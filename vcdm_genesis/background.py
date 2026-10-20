@@ -24,8 +24,8 @@ The coefficients ``A1, A2, B1, B2, z^2, c_R^2`` follow the manuscript
 ``E_eta`` instead of the divergent ``eta``.
 
 The pump ``z_xx/z = (ln z^2)_xx / 2 + [(ln z^2)_x]^2 / 4`` is evaluated from
-closed-form first and second derivatives of ``ln z^2``; these are verified
-against high-precision numerical differentiation in ``tests/test_background.py``.
+closed-form first and second derivatives of ``ln z^2``; these were checked
+against high-precision numerical differentiation during validation of the original release.
 
 Every public function accepts floats or NumPy arrays for ``x``.  The
 ``*_scalar`` helpers use the ``math`` module and are the fast path for ODE

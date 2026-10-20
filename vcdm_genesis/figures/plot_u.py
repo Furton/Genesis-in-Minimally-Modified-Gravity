@@ -93,8 +93,9 @@ def render(curves, pdf_path: Path, legend: bool = False) -> None:
         ax.plot([c["C"]], [U_hat(c["C"], c["d"])], "o", color=col, ms=5.5, zorder=5)
     if legend:
         ax.legend(loc="lower left", fontsize=14, frameon=True)
-    ax.set_xlabel(r"$y$")
-    ax.set_ylabel(r"$\tau_B^{2}\,U/\chi_1^{2}$")
+    ax.set_xlabel(r"$y$", fontsize=18)
+    ax.set_ylabel(r"$\tau_B^{2}\,U/\chi_1^{2}$", fontsize=18)
+    ax.tick_params(axis="both", which="both", labelsize=16)
     allU = np.concatenate([c["U"] for c in curves])
     ax.set_ylim(10 ** np.floor(np.log10(allU.min()) - 0.2), 10 ** np.ceil(np.log10(allU.max()) + 0.2))
     ax.set_xlim(min(c["y"].min() for c in curves), max(c["y"].max() for c in curves))

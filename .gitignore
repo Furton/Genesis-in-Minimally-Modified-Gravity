@@ -1,7 +1,6 @@
 # Python build and cache debris
 __pycache__/
 *.py[cod]
-.pytest_cache/
 build/
 dist/
 *.egg-info/

@@ -1,7 +1,0 @@
-# The code is run in place from the repository root (python -m vcdm_genesis...,
-# see README.md); it is not packaged, so no packaging metadata or version is declared.
-
-[tool.pytest.ini_options]
-testpaths = ["tests"]
-pythonpath = ["."]
-addopts = "-q"

@@ -7,6 +7,10 @@ manuscript: `b = -tau_B > 0`, `x = tau/tau_B`, `T = 1 + x`, `kappa = b k`.
 Physical time runs from large `x` down to the Genesis endpoint `x = 0`; the
 paper evaluates the spectra at `x_f = 1e-7`.
 
+The accuracy results quoted below come from validation of the original release.
+The automated test suite and its reference fixtures have since been removed;
+they remain available in Git revision `ed36247`.
+
 ## Background and quadratic action (`background.py`)
 
 Exact closed forms are used everywhere; nothing is interpolated:
@@ -19,11 +23,11 @@ Exact closed forms are used everywhere; nothing is interpolated:
 are the manuscript expressions. The scalar pump `z_xx/z` is evaluated from
 closed-form first and second derivatives of `ln z^2` (using
 `alpha Htilde^2 = alpha0 (1+d)^2 T^-2`); the tensor pump is
-`a_xx/a = (1+d)^2 (T^{-2-2d} + T^{-2-d})`. Both are verified against 40-digit
-numerical differentiation in `tests/test_background.py`. Negative
+`a_xx/a = (1+d)^2 (T^{-2-2d} + T^{-2-d})`. Both were checked against 40-digit
+numerical differentiation during the original validation. Negative
 finite-wavenumber `c_R^2` is reported as is (never clamped); the manuscript
 counter-example `c_R^2 = -65.936...` at `d=1, alpha0=1e-5, kappa=1e-4, x=1e3`
-is a regression test.
+was included in the historical checks.
 
 ## Normalization (`spectra.py`)
 
@@ -42,8 +46,8 @@ initial time down to `x_final`.
 Initial data are the normalized finite-time adiabatic vacuum
 `u = (2 Omega)^{-1/2}`, `u_x = (i Omega - Omega_x/(2 Omega)) u` with
 `Omega = +sqrt(omega^2)`; `omega^2 <= 0` raises instead of being replaced by
-`|omega^2|`. `Omega_x` is a five-point stencil in `ln x` validated against
-mpmath.
+`|omega^2|`. `Omega_x` is a five-point stencil in `ln x`, checked against
+high-precision mpmath differentiation during the original validation.
 
 The initial time is the first point of a logarithmic search grid that passes
 all checks, times a safety multiplier of 2, **retested at the returned time and
@@ -51,14 +55,16 @@ on the bracket `x * {1/2, 1/sqrt2, 1, sqrt2, 2}`**:
 `omega^2 > 0`, `|c_R^2 - 1| <= 1e-3`, `|c_R^2| kappa^2 >= 1e5 |z_xx/z|`
 (tensors: `1e7`), `|Omega_x|/Omega^2 <= 1e-3`. The bracket rejects spurious
 passes caused by a zero of the pump: a test at a single time followed by a
-fixed multiplier can land on such a zero (the R6 regression case in
-`tests/test_modes.py` and `tests/fixtures/regression_cases.json`). If nothing
+fixed multiplier can land on such a zero. For example, with `alpha0 = 1e-30`,
+`d = 0.15316455696202533` and `kappa = 2.2616759492228647e-6`, the pump ratio
+is about `137963` near `x = 1.365114e6`, but only `2447` at twice that time.
+The bracket rejects this start. If nothing
 passes, `SelectionError` is raised; the search cap is never returned as a valid
 start.
 
 An independent formulation, `R_xx + (ln z^2)_x R_x + c_R^2 kappa^2 R = 0`
-for `R = u/z` (no pump term), agrees with the canonical evolution to
-`<= 2.4e-10` on the regression fixture; initial-time doubling changes the
+for `R = u/z` (no pump term), agreed with the canonical evolution to
+`<= 2.4e-10` at the historical reference points; initial-time doubling changed the
 powers by `<= 1.8e-8` and tolerance tightening by `<= 7e-10`.
 
 Commands: `python -m vcdm_genesis.mode_cli single|converge|tensor|benchmark`.
@@ -71,6 +77,10 @@ with a different configuration is refused (fingerprint over axes, endpoint,
 solver settings and code hashes); duplicate keys are rejected; failed modes
 are recorded with their error, never replaced by fit values. `assemble`
 writes `alpha,d,kappa,Ps,status` in the canonical alpha-major order.
+
+The fingerprint includes source-file bytes, so even edits confined to docstrings
+or command-line help invalidate older checkpoints. Use a fresh output directory
+after such edits; existing checkpoint data are not changed.
 
 `python -m vcdm_genesis.table derivatives` adds `ns` and `alpha_s`: for each
 `(alpha, d)` block three extra converged modes are evolved beyond each end of
@@ -98,14 +108,13 @@ split of `Fitting.ipynb` (seed 1234); `minimax_fit` is the linear programme.
 
 `U_hat(y; d) = b^2 U/chi_1^2 = C^-p [Gamma(p, y)/d + Gamma(p+1, y)]`,
 `C = 2(1+d)/d`, `p = 2/d`, evaluated in log space with `gammaln` and the
-regularized `gammaincc`. Validated against independent quadrature of the
+regularized `gammaincc`. Originally checked against independent quadrature of the
 canonical matter equation and the elementary polynomials for `d = 1, 1/2, 1/3`
 (maximum relative deviation 3e-15 on the tested points). Supported domain
 `0.05 <= d <= 10`, `0 <= y <= 300`; outside it the function raises.
 
 ## Reproduction
 
-    python -m pytest                                              # full test suite
     python -m vcdm_genesis.figures.plot_u --outdir figures --legend # Figure 1
     python -m vcdm_genesis.figures.spectral_index --outdir figures --processes 8   # Figure 5
     python -m vcdm_genesis.mode_cli single --alpha0 1e-23 --d 0.3 --kappa 1e-7 --x-final 0 --outdir out

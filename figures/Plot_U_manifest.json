@@ -43,6 +43,6 @@
   "curves_csv": "Plot_U_curves.csv",
   "curves_csv_sha256": "8eff07356fb98072285f5f45a7e86013803bb643e235d416231cfdffed097ce2",
   "pdf": "Plot_U.pdf",
-  "pdf_sha256": "5afb07e03e3d0fa7ecb3787a0d122cae24eceea65f01ff638f7fa45399a78209",
+  "pdf_sha256": "9373f55aabe6adca8052e7c8af4d6715758340c5ddf7174fba920c7dd81f3fee",
   "note": "PDF bytes may differ across matplotlib/font versions; compare curve data and rendered content."
 }

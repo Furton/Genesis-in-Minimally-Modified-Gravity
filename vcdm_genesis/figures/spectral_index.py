@@ -4,12 +4,13 @@ Declared configuration (manuscript caption and rendered page)::
 
     alpha0 = 1e-23,   d in (0.30, 0.35, 0.40),   1e-9 <= kappa <= 1e-4
 
-Solid curves: spectral index and running from independently evolved modes,
+Open symbols: spectral index and running from independently evolved modes,
 differentiated by centred seven-point finite differences in ``ln kappa`` on a
 log-uniform grid with three extra converged modes beyond each boundary
 (``vcdm_genesis.derivatives``).  Dashed curves: derivatives of the fit template
-with the single declared coefficient record (``vcdm_genesis.fit``).  Both sets
-of curve parameters and the legends are derived from this configuration.
+with the single declared coefficient record (``vcdm_genesis.fit``). Symbols
+mark every fourth numerical sample; all samples remain in the curve CSV.
+Both sets of curve parameters and the legends are derived from this configuration.
 The Planck 2018 marginal bands are drawn as given in the manuscript
 (``n_s = 0.9649 +- 0.0042`` without running; ``alpha_s = -0.0045 +- 0.0067``
 with running); they are separate marginal benchmarks, not a joint region.
@@ -80,16 +81,32 @@ def render(num, fitc, ds, outdir: Path):
     import matplotlib
     matplotlib.use("Agg")
     import matplotlib.pyplot as plt
+    import matplotlib.patheffects as path_effects
+    from matplotlib.lines import Line2D
+
     colors = plt.rcParams["axes.prop_cycle"].by_key()["color"]
+    markers = ("o", "s", "^")
     for key, fname, ylabel, band in (("n_s", "n_s.pdf", r"$n_s$", PLANCK_NS), ("alpha_s", "alpha_s.pdf", r"$\alpha_s$", PLANCK_AS)):
         fig, ax = plt.subplots(figsize=(5.2, 3.9), dpi=150)
-        ax.axhspan(band[0] - band[1], band[0] + band[1], color="0.85", zorder=0,
-                   label=rf"Planck $1\sigma$ ({band[0]:.4f} $\pm$ {band[1]:.4f})")
+        band_patch = ax.axhspan(band[0] - band[1], band[0] + band[1], color="0.85", zorder=0)
+        handles, labels = [band_patch], [r"Planck $68\%$"]
         for i, d in enumerate(ds):
             col = colors[i % len(colors)]
-            light_col = tuple(0.75 * c + 0.25 for c in matplotlib.colors.to_rgb(col))
-            ax.semilogx(num[d]["kappa"], num[d][key], "-", color=light_col, lw=2.4, label=f"$d = {d:.2f}$ numerical")
-            ax.semilogx(fitc[d]["kappa"], fitc[d][key], color=col, linestyle=(0, (6, 4)), lw=1.5, label=f"$d = {d:.2f}$ fit")
+            marker = markers[i % len(markers)]
+            fit_line, = ax.semilogx(
+                fitc[d]["kappa"], fitc[d][key], color=col,
+                linestyle=(0, (5, 3)), lw=1.5, zorder=3,
+                path_effects=[path_effects.Stroke(linewidth=3.2, foreground="white"), path_effects.Normal()],
+            )
+            ax.semilogx(
+                num[d]["kappa"], num[d][key], linestyle="none", marker=marker,
+                markevery=(i % 4, 4), markersize=6, markerfacecolor="white",
+                markeredgecolor=col, markeredgewidth=1.1, zorder=4, clip_on=False,
+            )
+            handles += [Line2D([], [], color=col, linestyle="none", marker=marker,
+                               markersize=6, markerfacecolor="white", markeredgecolor=col,
+                               markeredgewidth=1.1), fit_line]
+            labels += [f"$d = {d:.2f}$ numerical", f"$d = {d:.2f}$ fit"]
         if key == "n_s":
             ax.axhline(1.0, color="0.5", lw=0.6, ls=":")
         else:
@@ -98,7 +115,7 @@ def render(num, fitc, ds, outdir: Path):
         ax.set_ylabel(ylabel)
         ax.set_xlim(KAPPA_MIN, KAPPA_MAX)
         ax.grid(True, lw=0.3, alpha=0.5)
-        ax.legend(fontsize=7.5, loc="lower left", ncol=1)
+        ax.legend(handles, labels, fontsize=10.5, loc="lower left", ncol=1, handlelength=3)
         fig.tight_layout()
         tmp = outdir / (fname + ".tmp.pdf")
         fig.savefig(tmp, format="pdf", metadata={"Creator": "vcdm_genesis spectral_index", "CreationDate": None})

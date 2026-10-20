@@ -336,7 +336,7 @@ def build_parser():
     p.add_argument("--processes", type=int, default=0)
     p.add_argument("--chunk-size", type=int, default=500)
     p.add_argument("--limit", type=int, default=0, help="compute at most N remaining keys (bounded runs)")
-    p.add_argument("--stop-after-chunks", type=int, default=0, help="stop after N chunks (resume tests)")
+    p.add_argument("--stop-after-chunks", type=int, default=0, help="stop after N chunks; rerun to resume")
     p.set_defaults(func=cmd_amplitudes)
     p = sub.add_parser("assemble")
     p.add_argument("--outdir", type=Path, required=True)

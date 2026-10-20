@@ -232,7 +232,7 @@ def build_parser():
     p.add_argument("--rtol", type=float, default=SolverConfig.rtol)
     p.add_argument("--x-final", type=float, default=X_FINAL_PAPER)
     p.add_argument("--repeat", type=int, default=4, help="repeat the sample this many times in the parallel stage")
-    p.add_argument("--limit", type=int, default=0, help="use only the first N sample points (tests)")
+    p.add_argument("--limit", type=int, default=0, help="use only the first N sample points for a smaller run")
     p.set_defaults(func=cmd_benchmark)
     return ap
 

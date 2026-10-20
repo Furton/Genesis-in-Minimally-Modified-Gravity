@@ -108,7 +108,9 @@ def omega_of_x(kappa, alpha0, d, x) -> float:
 
 
 def omega_derivative(kappa, alpha0, d, x, rel_step: float = 1e-4) -> float:
-    """``dOmega/dx`` by a five-point stencil in ``ln x`` (validated against mpmath in the tests).
+    """``dOmega/dx`` by a five-point stencil in ``ln x``.
+
+    Checked against high-precision differentiation during validation of the original release.
 
     Uses ``Omega = +sqrt(omega^2)`` and raises if ``omega^2 <= 0`` at any stencil node;
     negative ``omega^2`` is never replaced by ``|omega^2|`` or zero.

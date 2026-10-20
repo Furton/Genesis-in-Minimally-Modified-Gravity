@@ -57,6 +57,6 @@
   "matplotlib": "3.11.0",
   "curves_csv": "spectral_index_curves.csv",
   "curves_csv_sha256": "d643beaf954925994908e47cd7d29f900cbebe31d1762916ca60b1f51c5686f0",
-  "n_s_pdf_sha256": "7143941e5ee3571350eae646f2451df071322e596c255caef052d8ad7e19e46f",
-  "alpha_s_pdf_sha256": "7acb0bbde9da894540a240ce30fd052d2529e2c003cb1d5a7fcd687d0fc9c514"
+  "n_s_pdf_sha256": "5d9d606c1c3aa07dd7edea0a6f6bb903d2173935877950b96261f627c5963298",
+  "alpha_s_pdf_sha256": "cb14dd368e02e4f98ea2082a1b497fcde556c4a4bc7d264f0ae31c209d509541"
 }
