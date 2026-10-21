@@ -1,0 +1,79 @@
+{
+  "figure": "Figure 4 (fig:Evolution_Power_R)",
+  "generator": "vcdm_genesis.figures.curvature_power",
+  "configuration": {
+    "alpha0": 1e-22,
+    "evolution_d": 0.3,
+    "evolution_kappa": 1e-07,
+    "d_values": [
+      0.3,
+      0.5,
+      0.7
+    ],
+    "kappa_range": [
+      1e-14,
+      1e-05
+    ],
+    "n_kappa_per_d": 100,
+    "n_evolution": 1500,
+    "x_final": 1e-07
+  },
+  "normalization": {
+    "evolution": "abs(u_hat/z) = abs(M_Pl R_k/sqrt(-tau_B))",
+    "spectrum": "S_R = tau_B^2 M_Pl^2 P_R = kappa^3/(2 pi^2) abs(u_hat/z)^2"
+  },
+  "numerical_method": "DOP853 with exact coefficients, retested adiabatic vacuum, no coefficient interpolation",
+  "solver": {
+    "pump_ratio_min": 100000.0,
+    "tensor_pump_ratio_min": 10000000.0,
+    "cR2_tol": 0.001,
+    "adiabatic_tol": 0.001,
+    "x_search_min": 0.01,
+    "x_search_max": 1e+23,
+    "n_search": 800,
+    "multiplier": 2.0,
+    "bracket": [
+      0.5,
+      0.7071067811865475,
+      1.0,
+      1.4142135623730951,
+      2.0
+    ],
+    "method": "DOP853",
+    "rtol": 1e-10,
+    "atol_factor": 0.001,
+    "max_steps_per_period": 0.0
+  },
+  "evolution_initial_time": 2959666396.475066,
+  "evolution_vacuum_checks": {
+    "x_first_pass": 1479833198.237533,
+    "ratio_at_first_pass": 105081.11565098673,
+    "x_returned": 2959666396.475066,
+    "ratio_at_returned": 419742.2579362504,
+    "cR2_at_returned": 0.9999747023420447,
+    "adiabaticity_at_returned": 7.747009985155051e-08,
+    "omega2_at_returned": 9.999770846961761e-15,
+    "bracket_min_ratio": 105081.11565098673,
+    "grid_points_tested": 358,
+    "capped": false
+  },
+  "minimum_spectrum_bracket_pump_ratio": 100042.27008478416,
+  "slope_guides": "x^(-1-d) and x^(-d); arbitrary vertical offsets from the supplied notebook",
+  "python": "3.12.10",
+  "numpy": "2.4.6",
+  "scipy": "1.17.1",
+  "matplotlib": "3.11.0",
+  "files_sha256": {
+    "Evolution_R.pdf": "0ced776b6a4809153a5cd51bc0e0af8dce05ce2a6b913684259ba03321a8cce7",
+    "P_R.pdf": "6126915e0eb48eeef1200db031db82671584785371c411c9b7000aa9f748891c",
+    "curvature_evolution_curves.csv": "d36fb1af7c06a680110b410501df6ae5e5a6919b2d65767fb9398ebf8ebd9153",
+    "curvature_power_curves.csv": "b9d6efb605e89d9c6358c0d5b05ed79cae4749f2cf30ffb54d3f574e0ed6e6bb"
+  },
+  "source_sha256": "0aa66652753b6b200444d0f84e334e7c9407959e94716660889b463572ccde43",
+  "hash_convention": "SHA-256 of LF-normalized CSV/source bytes and raw PDF bytes",
+  "corrections": [
+    "Left ordinate identifies u_hat/z with M_Pl R_k/sqrt(-tau_B)",
+    "Both panels use the paper endpoint x_f=1e-7",
+    "Uses the maintained solver instead of interpolated coefficients"
+  ]
+}
